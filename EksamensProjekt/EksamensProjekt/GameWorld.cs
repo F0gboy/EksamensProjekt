@@ -8,10 +8,16 @@ namespace EksamensProjekt
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
+        private Menu menu;
+       
         public GameWorld()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+
+
+
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -19,7 +25,7 @@ namespace EksamensProjekt
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            menu  = new Menu(GraphicsDevice, Content);
             base.Initialize();
         }
 
@@ -37,6 +43,8 @@ namespace EksamensProjekt
 
             // TODO: Add your update logic here
 
+            menu.Update(gameTime);  
+
             base.Update(gameTime);
         }
 
@@ -45,6 +53,9 @@ namespace EksamensProjekt
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+           menu.Draw(_spriteBatch);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
