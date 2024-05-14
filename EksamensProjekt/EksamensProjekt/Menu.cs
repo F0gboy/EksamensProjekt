@@ -60,12 +60,20 @@ class Menu
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(background,Vector2.Zero,Color.White);
-            spriteBatch.Draw(button, new Vector2(buttonRegistration.Center.X, buttonRegistration.Center.Y) , null, Color.White,0,original, 1,SpriteEffects.None,0);
-            spriteBatch.Draw(button, new Vector2(buttonLogin.Center.X, buttonLogin.Center.Y), null, Color.White, 0, original, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(background, Vector2.Zero, Color.White);
+
           
-            spriteBatch.DrawString(font, "Registration", new Vector2(screenWidth / 2 - font.MeasureString("Registration").Length()/2, buttonRegistration.Center.Y - 25), Color.White,0, new Vector2(0, 0),1,SpriteEffects.None,0);
-            spriteBatch.DrawString(font,"Login", new Vector2(screenWidth / 2 - font.MeasureString("Login").Length() / 2, buttonLogin.Center.Y - 25), Color.White,0,new Vector2(0,0),1,SpriteEffects.None,0);
+            spriteBatch.Draw(button, new Vector2(buttonRegistration.Center.X - button.Width, buttonRegistration.Center.Y - button.Height / 2), Color.White);
+            spriteBatch.Draw(button, new Vector2(buttonLogin.Center.X - button.Width , buttonLogin.Center.Y - button.Height / 2), Color.White);
+
+
+            Vector2 registrationTextPosition = new Vector2(buttonRegistration.Center.X - font.MeasureString("Registration").Length() - 15, buttonRegistration.Center.Y - font.MeasureString("Registration").Y / 2);
+            Vector2 loginTextPosition = new Vector2(buttonLogin.Center.X - font.MeasureString("Login").Length() -55, buttonLogin.Center.Y - font.MeasureString("Login").Y / 2);
+
+            spriteBatch.DrawString(font, "Registration", registrationTextPosition, Color.White);
+            spriteBatch.DrawString(font, "Login", loginTextPosition, Color.White);
+
+
         }
     }
 }
