@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
 //using System.Drawing;
 //using System.Linq;
 //using System.Net.Mime;
@@ -23,6 +24,7 @@ class Menu
         private Rectangle buttonRegistration;
         private Rectangle buttonLogin;
         private Vector2 original;
+       
 
         int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         int screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
@@ -35,7 +37,7 @@ class Menu
             
 
 
-          original= new Vector2( button.Width/2, button.Height/2 );
+           // original= new Vector2( button.Width/2, button.Height/2 );
             buttonRegistration = new Rectangle (screenWidth / 2, screenHeight / 2,100,100);
             buttonLogin = new Rectangle(screenWidth / 2,screenHeight/2+100,100,100);
         }
@@ -43,19 +45,27 @@ class Menu
         {
             MouseState mouseState= Mouse.GetState();
 
-            // get mouse position
-            int x= mouseState.X;
-            int y= mouseState.Y;
 
-            // check if lefr bottun is pressed
-            if(mouseState.LeftButton==ButtonState.Pressed)
+
+
+            // check if left button is pressed
+            if (mouseState.LeftButton == ButtonState.Pressed)
             {
+                if (buttonRegistration.Contains(mouseState.Position))
+                {
+                    // Open game for registration
+                    //Registration();
+                }
 
-            }
 
-            if(mouseState.RightButton==ButtonState.Pressed)
-            {
-
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    if (buttonLogin.Contains(mouseState.Position))
+                    {
+                        // Open game for login
+                        //Login();
+                    }
+                }
             }
         }
         public void Draw(SpriteBatch spriteBatch)
