@@ -17,6 +17,8 @@ namespace EksamensProjekt
         private Texture2D enemyTexture;
         private Vector2 enemySpawnPosition = new Vector2(50, 50); // Example position
 
+        private BuildMenu buildMenu;
+       
         public GameWorld()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -31,7 +33,8 @@ namespace EksamensProjekt
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            //menu  = new Menu(GraphicsDevice, Content);
+            menu  = new Menu(GraphicsDevice, Content);
+            buildMenu  = new BuildMenu(GraphicsDevice, Content);
 
             Globals.WindowSize = new(1920, 1080);
             //_graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
@@ -76,10 +79,23 @@ namespace EksamensProjekt
 
             // TODO: Add your update logic here
 
-            //menu.Update(gameTime);  
+            //menul||.Update(gameTime);  
+            buildMenu.Update(gameTime);  
 
             base.Update(gameTime);
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
         protected override void Draw(GameTime gameTime)
         {
@@ -88,8 +104,8 @@ namespace EksamensProjekt
             _gameManager.Draw();
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            waveManager.Draw(gameTime, spriteBatch);
-            //menu.Draw(_spriteBatch);
+           //menu.Draw(_spriteBatch);
+           buildMenu.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);

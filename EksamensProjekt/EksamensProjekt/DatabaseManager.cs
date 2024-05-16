@@ -29,7 +29,7 @@ namespace EksamensProjekt
 
         public void CreateTables()
         {
-            string connectionString = "Host=localhost;Username=postgres;Password=xk74yj6pd4w20;Database=Icecold TD";
+            string connectionString = "Host=localhost;Username=postgres;Password=xxxxxx;Database=Icecold TD";
             NpgsqlDataSource dataSource = NpgsqlDataSource.Create(connectionString);
 
             string createTableLoginSystem = "CREATE TABLE IF NOT EXISTS Login_system (Login_id SERIAL PRIMARY KEY, Player_name VARCHAR(20) NOT NULL UNIQUE, Player_password VARCHAR(30) NOT NULL)";
