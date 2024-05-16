@@ -11,6 +11,7 @@ namespace EksamensProjekt
         private SpriteBatch _spriteBatch;
         private GameManager _gameManager;
         private Menu menu;
+        private BuildMenu buildMenu;
        
         public GameWorld()
         {
@@ -28,6 +29,7 @@ namespace EksamensProjekt
         {
             // TODO: Add your initialization logic here
             menu  = new Menu(GraphicsDevice, Content);
+            buildMenu  = new BuildMenu(GraphicsDevice, Content);
 
             Globals.WindowSize = new(1920, 1080);
             //_graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
@@ -61,10 +63,23 @@ namespace EksamensProjekt
 
             // TODO: Add your update logic here
 
-            menu.Update(gameTime);  
+            //menul||.Update(gameTime);  
+            buildMenu.Update(gameTime);  
 
             base.Update(gameTime);
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
         protected override void Draw(GameTime gameTime)
         {
@@ -73,7 +88,8 @@ namespace EksamensProjekt
             _gameManager.Draw();
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-           menu.Draw(_spriteBatch);
+           //menu.Draw(_spriteBatch);
+           buildMenu.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
