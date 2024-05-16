@@ -38,18 +38,19 @@ namespace EksamensProjekt
             Pathfinder.AStarPathfinding(tempRandomX, randomY, tempRandomX1, tempRandomY1);
 
             Random random2 = new();
-            int tempRandomX2 = random.Next(11, 13);
+            int tempRandomX2 = random.Next(9, 11);
             int tempRandomY2 = random.Next(0, 8);
             Pathfinder.AStarPathfinding(tempRandomX1, tempRandomY1, tempRandomX2, tempRandomY2);
 
             Random random5 = new();
             int tempRandomY5 = random.Next(0, 8);
-            Pathfinder.AStarPathfinding(tempRandomX2, tempRandomY2, 15, tempRandomY5);
+            Pathfinder.AStarPathfinding(tempRandomX2, tempRandomY2, 12, tempRandomY5);
         }
 
         public void Update()
         {
             // Update logic goes here
+            InputManager.Update();
             _map.Update();
         }
 

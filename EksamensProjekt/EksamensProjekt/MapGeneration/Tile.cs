@@ -40,7 +40,7 @@ namespace EksamensProjekt.MapGeneration
             }
 
             //Color = Path ? Microsoft.Xna.Framework.Color.Green : Microsoft.Xna.Framework.Color.White;
-            Color = Blocked ? Microsoft.Xna.Framework.Color.Red : Color;
+            Color = Blocked ? Microsoft.Xna.Framework.Color.Red : Microsoft.Xna.Framework.Color.White;
 
             texture = Path ? Globals.Content.Load<Texture2D>("icemap") : Globals.Content.Load<Texture2D>("iceTile");
              

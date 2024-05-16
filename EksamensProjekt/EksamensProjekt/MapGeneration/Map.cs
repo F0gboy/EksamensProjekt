@@ -10,7 +10,7 @@ namespace EksamensProjekt.MapGeneration
 {
     public class Map
     {
-        public readonly Point Size = new(16, 9);
+        public readonly Point Size = new(13, 9);
         public Tile[,] Tiles { get; }
         public Point TileSize { get; }
 
