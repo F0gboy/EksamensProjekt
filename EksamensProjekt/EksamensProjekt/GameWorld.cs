@@ -34,7 +34,7 @@ namespace EksamensProjekt
         {
             // TODO: Add your initialization logic here
             menu  = new Menu(GraphicsDevice, Content);
-            buildMenu  = new BuildMenu(GraphicsDevice, Content);
+           // buildMenu  = new BuildMenu(GraphicsDevice, Content);
 
             Globals.WindowSize = new(1920, 1080);
             //_graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
@@ -45,8 +45,8 @@ namespace EksamensProjekt
             Globals.Content = Content;
             _gameManager = new();
 
-            List<Vector2> path = Pathfinder.AStarPathfinding(goalX, goalY);
-            waveManager = new WaveManager(enemyTexture, enemySpawnPosition, path, 10, 1.0f); // 10 enemies per wave, 1 second between spawns
+            //List<Vector2> path = Pathfinder.AStarPathfinding(goalX, goalY);
+            //waveManager = new WaveManager(enemyTexture, enemySpawnPosition, path, 10, 1.0f); // 10 enemies per wave, 1 second between spawns
             base.Initialize();
 
             base.Initialize();
@@ -70,17 +70,17 @@ namespace EksamensProjekt
 
             Globals.Update(gameTime);
 
-            waveManager.Update(gameTime);
+            //waveManager.Update(gameTime);
 
-            if (waveManager.WaveCleared())
-            {
-                waveManager.StartNextWave();
-            }
+            //if (waveManager.WaveCleared())
+            //{
+            //    waveManager.StartNextWave();
+            //}
 
             // TODO: Add your update logic here
 
-            //menul||.Update(gameTime);  
-            buildMenu.Update(gameTime);  
+            menu.Update(gameTime);  
+            //buildMenu.Update(gameTime);  
 
             base.Update(gameTime);
         }
@@ -104,8 +104,8 @@ namespace EksamensProjekt
             _gameManager.Draw();
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-           //menu.Draw(_spriteBatch);
-           buildMenu.Draw(_spriteBatch);
+           menu.Draw(_spriteBatch);
+           //buildMenu.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
