@@ -9,6 +9,7 @@ namespace EksamensProjekt
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Menu menu;
+        private BuildMenu buildMenu;
        
         public GameWorld()
         {
@@ -26,6 +27,7 @@ namespace EksamensProjekt
         {
             // TODO: Add your initialization logic here
             menu  = new Menu(GraphicsDevice, Content);
+            buildMenu  = new BuildMenu(GraphicsDevice, Content);
             base.Initialize();
         }
 
@@ -43,10 +45,23 @@ namespace EksamensProjekt
 
             // TODO: Add your update logic here
 
-            menu.Update(gameTime);  
+            //menul||.Update(gameTime);  
+            buildMenu.Update(gameTime);  
 
             base.Update(gameTime);
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
         protected override void Draw(GameTime gameTime)
         {
@@ -54,7 +69,8 @@ namespace EksamensProjekt
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-           menu.Draw(_spriteBatch);
+           //menu.Draw(_spriteBatch);
+           buildMenu.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
