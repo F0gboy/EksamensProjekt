@@ -45,8 +45,8 @@ namespace EksamensProjekt
             Globals.Content = Content;
             _gameManager = new();
 
-            List<Vector2> path = Pathfinder.AStarPathfinding(goalX, goalY);
-            waveManager = new WaveManager(enemyTexture, enemySpawnPosition, path, 10, 1.0f); // 10 enemies per wave, 1 second between spawns
+            //List<Vector2> path = Pathfinder.AStarPathfinding(goalX, goalY);
+            //waveManager = new WaveManager(enemyTexture, enemySpawnPosition, path, 10, 1.0f); // 10 enemies per wave, 1 second between spawns
             base.Initialize();
 
             base.Initialize();
@@ -70,12 +70,12 @@ namespace EksamensProjekt
 
             Globals.Update(gameTime);
 
-            waveManager.Update(gameTime);
+            //waveManager.Update(gameTime);
 
-            if (waveManager.WaveCleared())
-            {
-                waveManager.StartNextWave();
-            }
+            //if (waveManager.WaveCleared())
+            //{
+            //    waveManager.StartNextWave();
+            //}
 
             // TODO: Add your update logic here
 
