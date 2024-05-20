@@ -54,7 +54,7 @@ namespace EksamensProjekt
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 
             }
