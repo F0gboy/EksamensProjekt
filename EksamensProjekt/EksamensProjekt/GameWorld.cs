@@ -8,6 +8,7 @@ namespace EksamensProjekt
 {
     public class GameWorld : Game
     {
+        private static GameWorld instance;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private GameManager _gameManager;
@@ -28,6 +29,14 @@ namespace EksamensProjekt
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
+        }
+        public static GameWorld GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new GameWorld();
+            }
+            return instance;
         }
 
         protected override void Initialize()
