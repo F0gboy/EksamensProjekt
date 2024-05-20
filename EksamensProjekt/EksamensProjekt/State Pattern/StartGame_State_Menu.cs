@@ -17,7 +17,7 @@ namespace EksamensProjekt.State_Pattern
             MouseState mouseState = Mouse.GetState();
             if (!menu.clicked && mouseState.LeftButton == ButtonState.Pressed)
             {
-
+                menu.clicked= true;
                
                     if (menu.firstButton.Contains(mouseState.Position))
                     {
