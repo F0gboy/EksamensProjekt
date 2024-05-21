@@ -13,7 +13,6 @@ namespace EksamensProjekt.MapGeneration
         public readonly Point Size = new(13, 9);
         public Tile[,] Tiles { get; }
         public Point TileSize { get; }
-
         public Vector2 MapToScreen(int x, int y) => new(x * TileSize.X, y * TileSize.Y);
         public (int x, int y) ScreenToMap(int x, int y) => (x / TileSize.X, y / TileSize.Y);
 

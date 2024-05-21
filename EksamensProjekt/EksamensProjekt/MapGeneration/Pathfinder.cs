@@ -20,25 +20,26 @@ namespace EksamensProjekt.MapGeneration
             {
                 this.x = x;
                 this.y = y;
+                this.visited = false;
+                this.parent = null;
             }
         }
 
         private static Node[,] _nodeMap;
         private static Map _map;
-       
+
         private static readonly int[] row = { -1, 0, 0, 1 };
         private static readonly int[] col = { 0, -1, 1, 0 };
 
         public static void Init(Map map)
         {
             _map = map;
-
             CreateNodeMap();
         }
 
         public static (int x, int y) ScreenToMap(Vector2 pos)
         {
-            return _map.ScreenToMap(((int)pos.X), ((int)pos.Y));
+            return _map.ScreenToMap((int)pos.X, (int)pos.Y);
         }
 
         private static bool IsValid(int x, int y)
@@ -54,30 +55,42 @@ namespace EksamensProjekt.MapGeneration
             {
                 for (int j = 0; j < _map.Size.Y; j++)
                 {
-                    _map.Tiles[i, j].Path = false;
-                    _nodeMap[i, j] = new(i, j);
+                    _nodeMap[i, j] = new Node(i, j);
                     if (_map.Tiles[i, j].Blocked) _nodeMap[i, j].visited = true;
                 }
             }
         }
-        
 
-        public static List<Vector2> AStarPathfinding(int startX, int startY, int goalX, int goalY)
+        private static void ResetNodeMap()
         {
+            for (int i = 0; i < _map.Size.X; i++)
+            {
+                for (int j = 0; j < _map.Size.Y; j++)
+                {
+                    _nodeMap[i, j].visited = false;
+                    _nodeMap[i, j].parent = null;
+                }
+            }
+        }
+
+        public static List<Point> AStarPathfinding(Point start, Point goal)
+        {
+           ResetNodeMap();
+
             List<Node> openList = new List<Node>();
             HashSet<Node> closedList = new HashSet<Node>();
 
-            var start = _nodeMap[startX, startY];
-            start.visited = true;
-            openList.Add(start);
+            Node startNode = _nodeMap[start.X, start.Y];
+            startNode.visited = true;
+            openList.Add(startNode);
 
             while (openList.Count > 0)
             {
-                Node current = openList.OrderBy(node => node.x + node.y + Heuristic(node.x, node.y, goalX, goalY)).First();
+                Node current = openList.OrderBy(node => node.x + node.y + Heuristic(node.x, node.y, goal.X, goal.Y)).First();
 
-                if (current.x == goalX && current.y == goalY)
+                if (current.x == goal.X && current.y == goal.Y)
                 {
-                    return RetracePath(goalX, goalY);
+                    return RetracePath(goal.X, goal.Y);
                 }
 
                 openList.Remove(current);
@@ -112,16 +125,16 @@ namespace EksamensProjekt.MapGeneration
             return Math.Abs(x - goalX) + Math.Abs(y - goalY);
         }
 
-        private static List<Vector2> RetracePath(int goalX, int goalY)
+        private static List<Point> RetracePath(int goalX, int goalY)
         {
-            Stack<Vector2> stack = new();
-            List<Vector2> result = new();
+            Stack<Point> stack = new Stack<Point>();
+            List<Point> result = new List<Point>();
             Node curr = _nodeMap[goalX, goalY];
 
-            while (curr is not null)
+            while (curr != null)
             {
                 _map.Tiles[curr.x, curr.y].Path = true;
-                stack.Push(_map.Tiles[curr.x, curr.y].Position);
+                stack.Push(new Point(curr.x, curr.y));
                 curr = curr.parent;
             }
 

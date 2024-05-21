@@ -16,20 +16,20 @@ namespace EksamensProjekt
         private int enemiesPerWave;
         private float timeBetweenSpawns;
         private List<Enemy> enemies;
-        private Vector2 spawnPosition;
         private Texture2D enemyTexture;
-        private List<Vector2> path;
+        private List<Vector2> pathPoints;
+        private float enemySpeed;
 
-        public WaveManager(Texture2D enemyTexture, Vector2 spawnPosition, List<Vector2> path, int enemiesPerWave, float timeBetweenSpawns)
+        public WaveManager(Texture2D enemyTexture, List<Vector2> pathPoints, int enemiesPerWave, float timeBetweenSpawns, float enemySpeed)
         {
             this.waveNumber = 1;
             this.spawnTimer = 0f;
             this.enemiesPerWave = enemiesPerWave;
             this.timeBetweenSpawns = timeBetweenSpawns;
             this.enemies = new List<Enemy>();
-            this.spawnPosition = spawnPosition;
             this.enemyTexture = enemyTexture;
-            this.path = path;
+            this.pathPoints = pathPoints;
+            this.enemySpeed = enemySpeed;
         }
 
         public void Update(GameTime gameTime)
@@ -54,9 +54,13 @@ namespace EksamensProjekt
 
         private void SpawnEnemy()
         {
-            // Create a new enemy instance at the spawn position
-            Enemy newEnemy = new Enemy(enemyTexture, spawnPosition, new List<Vector2>(path)); // Pass the path
-            enemies.Add(newEnemy);
+            Vector2 spawnPosition = pathPoints[0];
+
+            if (!float.IsNaN(spawnPosition.X) && !float.IsNaN(spawnPosition.Y))
+            {
+                Enemy newEnemy = new Enemy(enemyTexture, spawnPosition, new List<Vector2>(pathPoints), enemySpeed);
+                enemies.Add(newEnemy);
+            }
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

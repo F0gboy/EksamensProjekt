@@ -4,20 +4,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace EksamensProjekt
 {
     internal class GameManager
     {
-        private readonly Map _map;
+        public List<Vector2> PathPoints { get; private set; }
+        private Map _map;
+        private int tileSize = 120;
 
         public GameManager()
         {
-            _map = new();
-
+            _map = new Map();
             Pathfinder.Init(_map);
-
             GenerateMap();
+        }
+
+        private Vector2 GridToScreen(Point gridPos)
+        {
+            return new Vector2(gridPos.X * tileSize, gridPos.Y * tileSize);
         }
 
         public void GenerateMap()
@@ -25,26 +31,38 @@ namespace EksamensProjekt
             Random r = new Random();
 
             int randomY = r.Next(0, 8);
+            int tempRandomX = new Random().Next(2, 4);
+            List<Point> path1 = Pathfinder.AStarPathfinding(new Point(0, randomY), new Point(tempRandomX, randomY));
+            if (path1 == null) { Console.WriteLine("Path1 is null"); }
 
-            Random random = new();
-            int tempRandomX = random.Next(2, 4);
-            
-            Pathfinder.AStarPathfinding((int) 0, randomY, tempRandomX, randomY);
+            int tempRandomX1 = new Random().Next(6, 8);
+            int tempRandomY1 = new Random().Next(0, 8);
+            List<Point> path2 = Pathfinder.AStarPathfinding(new Point(tempRandomX, randomY), new Point(tempRandomX1, tempRandomY1));
+            if (path2 == null) { Console.WriteLine("Path2 is null"); }
 
-            Random random1 = new();
-            int tempRandomX1 = random.Next(6, 8);
-            int tempRandomY1 = random.Next(0, 8);
+            int tempRandomX2 = new Random().Next(9, 11);
+            int tempRandomY2 = new Random().Next(0, 8);
+            List<Point> path3 = Pathfinder.AStarPathfinding(new Point(tempRandomX1, tempRandomY1), new Point(tempRandomX2, tempRandomY2));
+            if (path3 == null) { Console.WriteLine("Path3 is null"); }
 
-            Pathfinder.AStarPathfinding(tempRandomX, randomY, tempRandomX1, tempRandomY1);
+            int tempRandomY5 = new Random().Next(0, 8);
+            List<Point> path4 = Pathfinder.AStarPathfinding(new Point(tempRandomX2, tempRandomY2), new Point(12, tempRandomY5));
+            if (path4 == null) { Console.WriteLine("Path4 is null"); }
 
-            Random random2 = new();
-            int tempRandomX2 = random.Next(9, 11);
-            int tempRandomY2 = random.Next(0, 8);
-            Pathfinder.AStarPathfinding(tempRandomX1, tempRandomY1, tempRandomX2, tempRandomY2);
+            PathPoints = new List<Vector2>();
+            AddPathPoints(path1);
+            AddPathPoints(path2);
+            AddPathPoints(path3);
+            AddPathPoints(path4);
+        }
 
-            Random random5 = new();
-            int tempRandomY5 = random.Next(0, 8);
-            Pathfinder.AStarPathfinding(tempRandomX2, tempRandomY2, 12, tempRandomY5);
+        private void AddPathPoints(List<Point> path)
+        {
+            foreach (var point in path)
+            {
+                Vector2 screenPos = GridToScreen(point);
+                PathPoints.Add(screenPos);
+            }
         }
 
         public void Update()
@@ -56,11 +74,7 @@ namespace EksamensProjekt
 
         public void Draw()
         {
-            Globals.SpriteBatch.Begin();
-
             _map.Draw();
-
-            Globals.SpriteBatch.End();
         }
     }
 }
