@@ -49,7 +49,7 @@ namespace EksamensProjekt
             //_graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
             _graphics.IsFullScreen = false;
             _graphics.ApplyChanges();
-
+            uI_Liv_Money = new UI_liv_money(Content);
             Globals.Content = Content;
 
             _gameManager = new GameManager();
