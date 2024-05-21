@@ -9,6 +9,7 @@ namespace EksamensProjekt
 {
     public class GameWorld : Game
     {
+        private static GameWorld instance;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Menu menu;
@@ -27,11 +28,20 @@ namespace EksamensProjekt
             IsMouseVisible = true;
 
         }
+        public static GameWorld GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new GameWorld();
+            }
+            return instance;
+        }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            //menu  = new Menu(GraphicsDevice, Content);
+            // menu  = new Menu(GraphicsDevice, Content);
+            // buildMenu  = new BuildMenu(GraphicsDevice, Content);
 
             Globals.WindowSize = new(1920, 1080);
             //_graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
