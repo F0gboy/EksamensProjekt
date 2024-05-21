@@ -15,6 +15,7 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
         private List<Vector2> path;
         private int currentPathIndex;
         private float speed;
+        private Vector2 offset;
 
         public bool IsDead { get; private set; }
 

@@ -42,7 +42,7 @@ namespace EksamensProjekt
             Globals.Content = Content;
 
             _gameManager = new GameManager();
-            enemyTexture = Content.Load<Texture2D>("Fastzombie");
+            enemyTexture = Content.Load<Texture2D>("sæl");
 
             waveManager = new WaveManager(enemyTexture, _gameManager.PathPoints, 10, 1f, 100f);
 
