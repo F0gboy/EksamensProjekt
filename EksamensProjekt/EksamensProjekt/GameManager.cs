@@ -30,22 +30,22 @@ namespace EksamensProjekt
         {
             Random r = new Random();
 
-            int randomY = r.Next(0, 8);
+            int randomY = r.Next(1, 8);
             int tempRandomX = new Random().Next(2, 4);
             List<Point> path1 = Pathfinder.AStarPathfinding(new Point(0, randomY), new Point(tempRandomX, randomY));
             if (path1 == null) { Console.WriteLine("Path1 is null"); }
 
             int tempRandomX1 = new Random().Next(6, 8);
-            int tempRandomY1 = new Random().Next(0, 8);
+            int tempRandomY1 = new Random().Next(1, 8);
             List<Point> path2 = Pathfinder.AStarPathfinding(new Point(tempRandomX, randomY), new Point(tempRandomX1, tempRandomY1));
             if (path2 == null) { Console.WriteLine("Path2 is null"); }
 
             int tempRandomX2 = new Random().Next(9, 11);
-            int tempRandomY2 = new Random().Next(0, 8);
+            int tempRandomY2 = new Random().Next(1, 8);
             List<Point> path3 = Pathfinder.AStarPathfinding(new Point(tempRandomX1, tempRandomY1), new Point(tempRandomX2, tempRandomY2));
             if (path3 == null) { Console.WriteLine("Path3 is null"); }
 
-            int tempRandomY5 = new Random().Next(0, 8);
+            int tempRandomY5 = new Random().Next(1, 8);
             List<Point> path4 = Pathfinder.AStarPathfinding(new Point(tempRandomX2, tempRandomY2), new Point(12, tempRandomY5));
             if (path4 == null) { Console.WriteLine("Path4 is null"); }
 

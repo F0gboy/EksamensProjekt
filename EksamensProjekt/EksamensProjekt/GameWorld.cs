@@ -16,7 +16,8 @@ namespace EksamensProjekt
         private GameManager _gameManager;
         private WaveManager waveManager;
         private Texture2D enemyTexture;
-
+        private UI_liv_money uI_Liv_Money;
+        private GraphicsDevice _graphicsDevice;
         public GameWorld()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -42,6 +43,8 @@ namespace EksamensProjekt
             Globals.Content = Content;
 
             _gameManager = new GameManager();
+            uI_Liv_Money = new UI_liv_money(_graphicsDevice,Content);
+      
             enemyTexture = Content.Load<Texture2D>("Fastzombie");
 
             waveManager = new WaveManager(enemyTexture, _gameManager.PathPoints, 10, 1f, 100f);
@@ -73,6 +76,7 @@ namespace EksamensProjekt
             // TODO: Add your update logic here
 
             //menu.Update(gameTime);  
+            uI_Liv_Money.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -84,7 +88,9 @@ namespace EksamensProjekt
             _spriteBatch.Begin();
 
             _gameManager.Draw();
-           
+
+            uI_Liv_Money.Draw(_spriteBatch);
+
             waveManager.Draw(gameTime, _spriteBatch);
             //menu.Draw(_spriteBatch);
             _spriteBatch.End();
