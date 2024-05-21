@@ -17,7 +17,7 @@ namespace EksamensProjekt
         private Rectangle heartPosition;
         private int life=100;
         private SpriteFont UIfont;
-        public UI_liv_money(GraphicsDevice graphicsDevice, ContentManager contentManager) 
+        public UI_liv_money(/*GraphicsDevice graphicsDevice,*/ ContentManager contentManager) 
         {
             fishTexture = contentManager.Load<Texture2D>("Skærmbillede 2024-05-21 115214");
             fishPosition = new Rectangle(  10, 10, 80, 80);

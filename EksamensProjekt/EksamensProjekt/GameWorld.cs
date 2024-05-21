@@ -43,7 +43,7 @@ namespace EksamensProjekt
             Globals.Content = Content;
 
             _gameManager = new GameManager();
-            uI_Liv_Money = new UI_liv_money(_graphicsDevice,Content);
+            uI_Liv_Money = new UI_liv_money(/*_graphicsDevice*/Content);
       
             enemyTexture = Content.Load<Texture2D>("Fastzombie");
 
