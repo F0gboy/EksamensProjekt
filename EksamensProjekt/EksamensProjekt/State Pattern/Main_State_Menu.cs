@@ -35,9 +35,9 @@ public class Main_State_Menu:I_State_Menu
                 {
                     Environment.Exit(0);
                 }
+            }
                 if (mouseState.LeftButton != ButtonState.Pressed)
                     menu.clicked = false;
-            }
         }
         public void Draw(Menu menu, SpriteBatch spriteBatch)
         {           
