@@ -19,6 +19,7 @@ public class Menu
         public Rectangle firstButton;
         public Rectangle secondButton;
         public Rectangle thirdButton;
+        public Rectangle startButton;
         public string registrationTextName="Name";
         public string registrationTextPassword="Password";
         public bool login;
@@ -47,6 +48,7 @@ public class Menu
             firstButton = new Rectangle (screenWidth / 2, screenHeight / 2,button.Width,button.Height);
             secondButton = new Rectangle(screenWidth / 2,screenHeight/2+100, button.Width, button.Height);
             thirdButton= new Rectangle(screenWidth/2, screenHeight/2+200, button.Width, button.Height);
+            startButton= new Rectangle(screenWidth / 2,10, button.Width, button.Height);
             currentState =new Main_State_Menu();
         }
         public void GameState (I_State_Menu newState)

@@ -18,7 +18,8 @@ namespace EksamensProjekt
         private GameManager _gameManager;
         private WaveManager waveManager;
         private Texture2D enemyTexture;
-
+        private UI_liv_money uI_Liv_Money;
+        private GraphicsDevice _graphicsDevice;
         private StartGame_State_Menu startGameState;
 
         public GameWorld()
@@ -51,7 +52,7 @@ namespace EksamensProjekt
             //_graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
             _graphics.IsFullScreen = false;
             _graphics.ApplyChanges();
-
+            uI_Liv_Money = new UI_liv_money(Content);
             Globals.Content = Content;
 
             Texture2D normalEnemyTexture = Content.Load<Texture2D>("sæl");
@@ -93,7 +94,8 @@ namespace EksamensProjekt
                 _gameManager.Update();
                 waveManager.Update(gameTime);
             }
-
+            
+            uI_Liv_Money.Update(gameTime);
             menu.Update(gameTime);
 
 
@@ -114,6 +116,7 @@ namespace EksamensProjekt
                 waveManager.Draw(gameTime, _spriteBatch);
             }
 
+			uI_Liv_Money.Draw(_spriteBatch);
             menu.Draw(_spriteBatch);
 
             _spriteBatch.End();
