@@ -35,7 +35,7 @@ namespace EksamensProjekt.State_Pattern
                 {
                     gameStart = true;
                 }
-            }
+        
 
             if (mouseState.LeftButton != ButtonState.Pressed)
             {

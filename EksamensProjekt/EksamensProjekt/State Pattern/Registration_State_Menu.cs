@@ -22,32 +22,27 @@ namespace EksamensProjekt.State_Pattern
                     if (menu.registration==false  && menu.firstButton.Contains(mouseState.Position))
                     {
                     
-                        menu.firstRegistrationTextName = "";
+                        menu.registrationTextName = "";
                         menu.stringIsActiveName = true;
                         menu.stringIsActivePassword = false;
                     }
                     // Passwords 
                     else if (menu.secondButton.Contains(mouseState.Position))
                     {
-                        menu.firstRegistrationTextPassword = "";
+                        menu.registrationTextPassword = "";
                         menu.stringIsActiveName = false;
                         menu.stringIsActivePassword = true;
                     }
                     // Enter
                     else if (menu.thirdButton.Contains(mouseState.Position))
                     {
-                        if (!string.IsNullOrEmpty(menu.firstRegistrationTextName.ToString()) && !string.IsNullOrEmpty(menu.firstRegistrationTextPassword.ToString()))
+                        if (!string.IsNullOrEmpty(menu.stringName.ToString()) && !string.IsNullOrEmpty(menu.stringPassword.ToString()))
                         {
-                            Database.DatabaseManager.RegisterUser(menu.stringName, menu.stringPassword);
+                            if (Database.DatabaseManager.RegisterUser(menu.stringName, menu.stringPassword) == true)
+                            {
+                                menu.GameState(new StartGame_State_Menu());
+                            }                            
                         }
-
-
-
-                        if (Database.DatabaseManager.RegisterUser(menu.registrationTextName, menu.registrationTextPassword) == true)
-                        {
-                            menu.GameState(new StartGame_State_Menu());
-                        }
-
                     }
                 }
 
@@ -82,8 +77,8 @@ namespace EksamensProjekt.State_Pattern
                 Vector2 loginTextPosition = new Vector2(menu.secondButton.Center.X - menu.font.MeasureString("Password").Length() - 25, menu.secondButton.Center.Y - menu.font.MeasureString("Login").Y / 2);
                 Vector2 thirdButtonTextPosition = new Vector2(menu.thirdButton.Center.X - menu.font.MeasureString("Save").Length() - 50, menu.thirdButton.Center.Y - menu.font.MeasureString("Save").Y / 2);
 
-                spriteBatch.DrawString(menu.font, menu.firstRegistrationTextName, registrationTextPosition, Color.White);
-                spriteBatch.DrawString(menu.font, menu.firstRegistrationTextPassword, loginTextPosition, Color.White);
+                spriteBatch.DrawString(menu.font, menu.registrationTextName, registrationTextPosition, Color.White);
+                spriteBatch.DrawString(menu.font, menu.registrationTextPassword, loginTextPosition, Color.White);
                 spriteBatch.DrawString(menu.font, "Save", thirdButtonTextPosition, Color.White);
 
                 // Users input
