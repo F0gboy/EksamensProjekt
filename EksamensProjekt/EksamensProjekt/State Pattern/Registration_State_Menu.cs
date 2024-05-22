@@ -18,36 +18,39 @@ namespace EksamensProjekt.State_Pattern
                 if (!menu.clicked && mouseState.LeftButton == ButtonState.Pressed)
                 {
                     menu.clicked = true;
-                // Names 
-                if (menu.registration==false  && menu.firstButton.Contains(mouseState.Position))
+                    // Names 
+                    if (menu.registration==false  && menu.firstButton.Contains(mouseState.Position))
                     {
                     
-                        menu.registrationTextName = "";
+                        menu.firstRegistrationTextName = "";
                         menu.stringIsActiveName = true;
                         menu.stringIsActivePassword = false;
                     }
                     // Passwords 
                     else if (menu.secondButton.Contains(mouseState.Position))
                     {
-                        menu.registrationTextPassword = "";
+                        menu.firstRegistrationTextPassword = "";
                         menu.stringIsActiveName = false;
                         menu.stringIsActivePassword = true;
                     }
                     // Enter
                     else if (menu.thirdButton.Contains(mouseState.Position))
                     {
-                        // Logic for the database
-
-
-                        if (!string.IsNullOrWhiteSpace(menu.stringName.ToString()) && !string.IsNullOrWhiteSpace(menu.stringPassword.ToString()))
+                        if (!string.IsNullOrEmpty(menu.firstRegistrationTextName.ToString()) && !string.IsNullOrEmpty(menu.firstRegistrationTextPassword.ToString()))
                         {
+                            Database.DatabaseManager.RegisterUser(menu.stringName, menu.stringPassword);
+                        }
 
+
+
+                        if (Database.DatabaseManager.RegisterUser(menu.registrationTextName, menu.registrationTextPassword) == true)
+                        {
                             menu.GameState(new StartGame_State_Menu());
-
                         }
 
                     }
                 }
+
                 if (mouseState.LeftButton != ButtonState.Pressed)
                     menu.clicked = false;
 
@@ -56,9 +59,9 @@ namespace EksamensProjekt.State_Pattern
                 {
                     menu.keyboardPressed = true;
                     if (menu.stringIsActiveName)
-                        menu.HandleInput(menu.stringName);
+                        menu.HandleInput(ref menu.stringName);//ref
                     else if (menu.stringIsActivePassword)
-                        menu.HandleInput(menu.stringPassword);
+                        menu.HandleInput(ref menu.stringPassword);//ref
                 }
                 else if (menu.currentKeyboardState.GetPressedKeyCount() < 1)
                     menu.keyboardPressed = false;
@@ -79,8 +82,8 @@ namespace EksamensProjekt.State_Pattern
                 Vector2 loginTextPosition = new Vector2(menu.secondButton.Center.X - menu.font.MeasureString("Password").Length() - 25, menu.secondButton.Center.Y - menu.font.MeasureString("Login").Y / 2);
                 Vector2 thirdButtonTextPosition = new Vector2(menu.thirdButton.Center.X - menu.font.MeasureString("Save").Length() - 50, menu.thirdButton.Center.Y - menu.font.MeasureString("Save").Y / 2);
 
-                spriteBatch.DrawString(menu.font, menu.registrationTextName, registrationTextPosition, Color.White);
-                spriteBatch.DrawString(menu.font, menu.registrationTextPassword, loginTextPosition, Color.White);
+                spriteBatch.DrawString(menu.font, menu.firstRegistrationTextName, registrationTextPosition, Color.White);
+                spriteBatch.DrawString(menu.font, menu.firstRegistrationTextPassword, loginTextPosition, Color.White);
                 spriteBatch.DrawString(menu.font, "Save", thirdButtonTextPosition, Color.White);
 
                 // Users input

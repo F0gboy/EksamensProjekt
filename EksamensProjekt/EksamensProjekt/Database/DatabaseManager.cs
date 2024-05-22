@@ -12,7 +12,7 @@ namespace EksamensProjekt.Database
     internal class DatabaseManager
     {
         private static DatabaseManager instance;
-        private readonly string _connectionString = "Filename=Icecold TD data.db;";
+        private static readonly string _connectionString = "Filename=Icecold TD data.db;";
 
         public static DatabaseManager Instance
         {
@@ -64,7 +64,7 @@ namespace EksamensProjekt.Database
         //}
 
 
-        public void RegisterUser(string playername, string password)
+        public static bool RegisterUser(string playername, string password)
         {
             using (var db = new LiteDatabase(_connectionString))
             {
@@ -72,7 +72,7 @@ namespace EksamensProjekt.Database
 
                 if (loginsystems.Exists(x => x.PlayerName == playername))
                 {
-                    throw new Exception("Player name does already exists.");
+                    return false;
                 }
 
                 var loginsystem = new LoginSystem
@@ -82,10 +82,11 @@ namespace EksamensProjekt.Database
                 };
 
                 loginsystems.Insert(loginsystem);
+                return true;
             }
         }
 
-        private string HashPassword(string password)
+        private static string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())
             {
@@ -95,7 +96,7 @@ namespace EksamensProjekt.Database
             }
         }
 
-        public bool LoginUser(string playername, string password)
+        public static bool LoginUser(string playername, string password)
         {
             using (var db = new LiteDatabase(_connectionString))
             {
