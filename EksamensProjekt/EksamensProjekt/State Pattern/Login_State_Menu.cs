@@ -54,9 +54,9 @@ namespace EksamensProjekt.State_Pattern
                 {
                     menu.keyboardPressed = true;
                     if (menu.stringIsActiveName)
-                        menu.HandleInput(menu.stringName);
+                        menu.HandleInput(ref menu.stringName);////ref
                     else if (menu.stringIsActivePassword)
-                        menu.HandleInput(menu.stringPassword);
+                        menu.HandleInput(ref menu.stringPassword);///ref
                 }
                 else if (menu.currentKeyboardState.GetPressedKeyCount() < 1)
                     menu.keyboardPressed = false;
