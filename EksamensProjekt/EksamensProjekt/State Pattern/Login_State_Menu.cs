@@ -34,16 +34,15 @@ namespace EksamensProjekt.State_Pattern
                 // Enter
                 else if (menu.thirdButton.Contains(mouseState.Position))
                 {
-                    // Logic for the database
-
-
                     if (!string.IsNullOrWhiteSpace(menu.stringName.ToString()) && !string.IsNullOrWhiteSpace(menu.stringPassword.ToString()))
                     {
-
-                        menu.GameState(new StartGame_State_Menu());
-
+                        Database.DatabaseManager.LoginUser(menu.firstRegistrationTextName, menu.firstRegistrationTextPassword);
                     }
 
+                    if (Database.DatabaseManager.LoginUser(menu.firstRegistrationTextName, menu.firstRegistrationTextPassword) == true)
+                    {
+                        menu.GameState(new StartGame_State_Menu());
+                    }
                 }
             }
                 if (mouseState.LeftButton != ButtonState.Pressed)
@@ -76,8 +75,8 @@ namespace EksamensProjekt.State_Pattern
                 Vector2 loginTextPosition = new Vector2(menu.secondButton.Center.X - menu.font.MeasureString("Password").X - 25, menu.secondButton.Center.Y - menu.font.MeasureString("Login").Y / 2);
                 Vector2 thirdButtonTextPosition = new Vector2(menu.thirdButton.Center.X - menu.font.MeasureString("Enter").X - 50, menu.thirdButton.Center.Y - menu.font.MeasureString("Enter").Y / 2);
 
-                spriteBatch.DrawString(menu.font, menu.registrationTextName, registrationTextPosition, Color.White);
-                spriteBatch.DrawString(menu.font, menu.registrationTextPassword, loginTextPosition, Color.White);
+                spriteBatch.DrawString(menu.font, menu.firstRegistrationTextName, registrationTextPosition, Color.White);
+                spriteBatch.DrawString(menu.font, menu.firstRegistrationTextPassword, loginTextPosition, Color.White);
                 spriteBatch.DrawString(menu.font, "Enter", thirdButtonTextPosition, Color.White);
 
                 // Users input

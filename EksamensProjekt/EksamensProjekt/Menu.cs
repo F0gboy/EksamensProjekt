@@ -19,8 +19,10 @@ public class Menu
         public Rectangle firstButton;
         public Rectangle secondButton;
         public Rectangle thirdButton;
-        public string registrationTextName="Name";
-        public string registrationTextPassword="Password";
+        public string firstRegistrationTextName="Name";
+        public string firstRegistrationTextPassword="Password";
+        public string registrationTextName;
+        public string registrationTextPassword;
         public bool login;
         public bool gameStart;
         public bool clicked;
@@ -29,7 +31,7 @@ public class Menu
         public bool stringIsActivePassword;
         public bool keyboardPressed;
         public bool checkLogin;
-        public StringBuilder stringName= new StringBuilder();
+        public StringBuilder stringName { get; set; } = new StringBuilder();
         public StringBuilder stringPassword= new StringBuilder();
         public KeyboardState currentKeyboardState;
         public KeyboardState previousKeyboardState;
