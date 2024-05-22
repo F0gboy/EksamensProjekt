@@ -128,6 +128,13 @@
 /processorParam:TextureFormat=Color
 /build:sæl.png
 
+#begin secondFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:secondFont.spritefont
+
 #begin watertile2.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -1,5 +1,6 @@
 ﻿using EksamensProjekt.DesignPatterns.ComponentPattern;
 using EksamensProjekt.MapGeneration;
+using EksamensProjekt.State_Pattern;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -18,6 +19,7 @@ namespace EksamensProjekt
         private WaveManager waveManager;
         private Texture2D enemyTexture;
 
+        private StartGame_State_Menu startGameState;
 
         public GameWorld()
         {
@@ -41,7 +43,7 @@ namespace EksamensProjekt
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            // menu  = new Menu(GraphicsDevice, Content);
+            menu  = new Menu(GraphicsDevice, Content);
             // buildMenu  = new BuildMenu(GraphicsDevice, Content);
 
             Globals.WindowSize = new(1920, 1080);
@@ -59,6 +61,9 @@ namespace EksamensProjekt
             List<Vector2> pathPoints = _gameManager.PathPoints;
 
             waveManager = new WaveManager(normalEnemyTexture, strongEnemyTexture, pathPoints, 1.0f, 100f, 7.0f); // Adjust timeBetweenSpawns, enemySpeed, and timeBetweenWaves as needed
+
+            startGameState = new StartGame_State_Menu();
+
 
             base.Initialize();
 
@@ -78,14 +83,19 @@ namespace EksamensProjekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-
             Globals.Update(gameTime);
 
-            _gameManager.Update();
 
-            waveManager.Update(gameTime);
+            //waveManager.Update(gameTime);
 
-            //menu.Update(gameTime);  
+            if (startGameState.GameStart)
+            {
+                _gameManager.Update();
+                waveManager.Update(gameTime);
+            }
+
+            menu.Update(gameTime);
+
 
             base.Update(gameTime);
         }
@@ -96,10 +106,16 @@ namespace EksamensProjekt
 
             _spriteBatch.Begin();
 
-            _gameManager.Draw();
-           
-            waveManager.Draw(gameTime, _spriteBatch);
-            //menu.Draw(_spriteBatch);
+            //waveManager.Draw(gameTime, _spriteBatch);
+
+            if (startGameState.GameStart)
+            {
+                _gameManager.Draw();
+                waveManager.Draw(gameTime, _spriteBatch);
+            }
+
+            menu.Draw(_spriteBatch);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
