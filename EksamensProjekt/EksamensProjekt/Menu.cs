@@ -30,8 +30,10 @@ public class Menu
         public bool stringIsActivePassword;
         public bool keyboardPressed;
         public bool checkLogin;
-        public StringBuilder stringName { get; set; } = new StringBuilder();
-        public StringBuilder stringPassword= new StringBuilder();
+        public string stringName = string.Empty;
+        public string stringPassword = string.Empty;
+        //public StringBuilder stringName= new StringBuilder();
+        //public StringBuilder stringPassword= new StringBuilder();
         public KeyboardState currentKeyboardState;
         public KeyboardState previousKeyboardState;
         public MouseState mouseState = Mouse.GetState();
@@ -57,42 +59,79 @@ public class Menu
         }
         public void Update(GameTime gameTime)
         {
-            
-            currentState.Update(this,gameTime);
+            mouseState = Mouse.GetState();
+            currentState.Update(this, gameTime);
+            previousKeyboardState = currentKeyboardState;
         }
+        //public void Update(GameTime gameTime)
+        //{
+
+        //    currentState.Update(this,gameTime);
+        //}
         public void Draw(SpriteBatch spriteBatch)
         {
           currentState.Draw(this, spriteBatch);
         }
-        public void HandleInput(StringBuilder input)
+
+        public void HandleInput(ref string input)
         {
-            currentKeyboardState = previousKeyboardState;
             currentKeyboardState = Keyboard.GetState();
 
-            Keys[] keys= currentKeyboardState.GetPressedKeys();
+            Keys[] keys = currentKeyboardState.GetPressedKeys();
 
-            foreach( Keys key in keys)
+            foreach (Keys key in keys)
             {
                 if (previousKeyboardState.IsKeyUp(key))
                 {
                     if (key == Keys.Back && input.Length > 0)
                     {
-                        input.Remove(input.Length - 1, 1);
+                        input = input.Remove(input.Length - 1, 1);
                     }
-                    else if (key >= Keys.A && key <= Keys.Z) 
+                    else if (key >= Keys.A && key <= Keys.Z)
                     {
-                        input.Append(key.ToString().ToLower());
+                        input += key.ToString().ToLower();
                     }
-                    else if (key>= Keys.D0 && key <= Keys.D9)
+                    else if (key >= Keys.D0 && key <= Keys.D9)
                     {
-                        input.Append(key.ToString().Substring(1));
+                        input += key.ToString().Substring(1);
                     }
                     else if (key == Keys.Space)
                     {
-                        input.Append(' ');
+                        input += ' ';
                     }
                 }
             }
+            previousKeyboardState = currentKeyboardState;
         }
+        //public void HandleInput(StringBuilder input)
+        //{
+        //    currentKeyboardState = previousKeyboardState;
+        //    currentKeyboardState = Keyboard.GetState();
+
+        //    Keys[] keys= currentKeyboardState.GetPressedKeys();
+
+        //    foreach( Keys key in keys)
+        //    {
+        //        if (previousKeyboardState.IsKeyUp(key))
+        //        {
+        //            if (key == Keys.Back && input.Length > 0)
+        //            {
+        //                input.Remove(input.Length - 1, 1);
+        //            }
+        //            else if (key >= Keys.A && key <= Keys.Z) 
+        //            {
+        //                input.Append(key.ToString().ToLower());
+        //            }
+        //            else if (key>= Keys.D0 && key <= Keys.D9)
+        //            {
+        //                input.Append(key.ToString().Substring(1));
+        //            }
+        //            else if (key == Keys.Space)
+        //            {
+        //                input.Append(' ');
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
