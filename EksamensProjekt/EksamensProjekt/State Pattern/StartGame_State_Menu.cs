@@ -31,18 +31,12 @@ namespace EksamensProjekt.State_Pattern
                     }
                 
             }
-                if( mouseState.LeftButton != ButtonState.Pressed )
-                {
-                    gameStart = true;
-                }
-            }
-
-            if (mouseState.LeftButton != ButtonState.Pressed)
+            if( mouseState.LeftButton != ButtonState.Pressed )
             {
-                menu.clicked = false;
+                gameStart = true;
             }
         }
-
+        
         public void Draw(Menu menu, SpriteBatch spriteBatch)
         {
             if (!gameStart)

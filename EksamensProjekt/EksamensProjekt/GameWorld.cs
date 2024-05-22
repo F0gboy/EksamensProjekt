@@ -65,7 +65,6 @@ namespace EksamensProjekt
 
             startGameState = new StartGame_State_Menu();
 
-
             base.Initialize();
 
         }
@@ -86,18 +85,14 @@ namespace EksamensProjekt
 
             Globals.Update(gameTime);
 
-
-            //waveManager.Update(gameTime);
+            _gameManager.Update();
 
             if (startGameState.GameStart)
             {
-                _gameManager.Update();
                 waveManager.Update(gameTime);
             }
-            
             uI_Liv_Money.Update(gameTime);
             menu.Update(gameTime);
-
 
             base.Update(gameTime);
         }
@@ -108,15 +103,14 @@ namespace EksamensProjekt
 
             _spriteBatch.Begin();
 
-            //waveManager.Draw(gameTime, _spriteBatch);
+            _gameManager.Draw();
 
             if (startGameState.GameStart)
             {
-                _gameManager.Draw();
                 waveManager.Draw(gameTime, _spriteBatch);
             }
 
-			uI_Liv_Money.Draw(_spriteBatch);
+            uI_Liv_Money.Draw(_spriteBatch);
             menu.Draw(_spriteBatch);
 
             _spriteBatch.End();
