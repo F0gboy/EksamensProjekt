@@ -18,6 +18,7 @@ namespace EksamensProjekt
         private WaveManager waveManager;
         private Texture2D enemyTexture;
 
+
         public GameWorld()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -51,11 +52,13 @@ namespace EksamensProjekt
 
             Globals.Content = Content;
 
+            Texture2D normalEnemyTexture = Content.Load<Texture2D>("sæl");
+            Texture2D strongEnemyTexture = Content.Load<Texture2D>("orca");
+
             _gameManager = new GameManager();
-            enemyTexture = Content.Load<Texture2D>("sæl");
+            List<Vector2> pathPoints = _gameManager.PathPoints;
 
-            waveManager = new WaveManager(enemyTexture, _gameManager.PathPoints, 10, 1f, 100f);
-
+            waveManager = new WaveManager(normalEnemyTexture, strongEnemyTexture, pathPoints, 1.0f, 100f, 7.0f); // Adjust timeBetweenSpawns, enemySpeed, and timeBetweenWaves as needed
 
             base.Initialize();
 
@@ -76,11 +79,11 @@ namespace EksamensProjekt
                 Exit();
 
 
-            _gameManager.Update();
             Globals.Update(gameTime);
-            waveManager.Update(gameTime);
 
-            // TODO: Add your update logic here
+            _gameManager.Update();
+
+            waveManager.Update(gameTime);
 
             //menu.Update(gameTime);  
 

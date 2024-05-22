@@ -23,7 +23,7 @@ namespace EksamensProjekt.MapGeneration
         public Map()
         {
             Tiles = new Tile[Size.X, Size.Y];
-            var texture = Globals.Content.Load<Texture2D>("iceTile");
+            var texture = Globals.Content.Load<Texture2D>("iceTile2");
             TileSize = new(texture.Width, texture.Height);
 
             for (int y = 0; y < Size.Y; y++)
