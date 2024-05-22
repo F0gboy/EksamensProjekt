@@ -3,13 +3,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Text;
-
-
 namespace EksamensProjekt
 {
-public class Menu
+    public class Menu
     {
         private I_State_Menu currentState;
         public Texture2D background;
@@ -32,8 +28,6 @@ public class Menu
         public bool checkLogin;
         public string stringName = string.Empty;
         public string stringPassword = string.Empty;
-        //public StringBuilder stringName= new StringBuilder();
-        //public StringBuilder stringPassword= new StringBuilder();
         public KeyboardState currentKeyboardState;
         public KeyboardState previousKeyboardState;
         public MouseState mouseState = Mouse.GetState();
@@ -57,23 +51,18 @@ public class Menu
         {
             currentState= newState;
         }
+       
         public void Update(GameTime gameTime)
         {
-            mouseState = Mouse.GetState();
-            currentState.Update(this, gameTime);
-            previousKeyboardState = currentKeyboardState;
-        }
-        //public void Update(GameTime gameTime)
-        //{
 
-        //    currentState.Update(this,gameTime);
-        //}
+            currentState.Update(this, gameTime);
+        }
         public void Draw(SpriteBatch spriteBatch)
         {
           currentState.Draw(this, spriteBatch);
         }
 
-        public void HandleInput(ref string input)
+        public void HandleInput( ref string input)
         {
             currentKeyboardState = Keyboard.GetState();
 
@@ -103,35 +92,5 @@ public class Menu
             }
             previousKeyboardState = currentKeyboardState;
         }
-        //public void HandleInput(StringBuilder input)
-        //{
-        //    currentKeyboardState = previousKeyboardState;
-        //    currentKeyboardState = Keyboard.GetState();
-
-        //    Keys[] keys= currentKeyboardState.GetPressedKeys();
-
-        //    foreach( Keys key in keys)
-        //    {
-        //        if (previousKeyboardState.IsKeyUp(key))
-        //        {
-        //            if (key == Keys.Back && input.Length > 0)
-        //            {
-        //                input.Remove(input.Length - 1, 1);
-        //            }
-        //            else if (key >= Keys.A && key <= Keys.Z) 
-        //            {
-        //                input.Append(key.ToString().ToLower());
-        //            }
-        //            else if (key>= Keys.D0 && key <= Keys.D9)
-        //            {
-        //                input.Append(key.ToString().Substring(1));
-        //            }
-        //            else if (key == Keys.Space)
-        //            {
-        //                input.Append(' ');
-        //            }
-        //        }
-        //    }
-        //}
     }
 }
