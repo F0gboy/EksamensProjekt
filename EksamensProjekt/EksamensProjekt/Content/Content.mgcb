@@ -92,6 +92,13 @@
 /processorParam:TextureFormat=Color
 /build:sæl.png
 
+#begin secondFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:secondFont.spritefont
+
 #begin Skærmbillede 2024-05-21 115214.png
 /importer:TextureImporter
 /processor:TextureProcessor

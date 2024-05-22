@@ -41,7 +41,7 @@ namespace EksamensProjekt
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            // menu  = new Menu(GraphicsDevice, Content);
+            menu  = new Menu(GraphicsDevice, Content);
             // buildMenu  = new BuildMenu(GraphicsDevice, Content);
 
             Globals.WindowSize = new(1920, 1080);
@@ -83,7 +83,7 @@ namespace EksamensProjekt
 
             // TODO: Add your update logic here
 
-            //menu.Update(gameTime);  
+            menu.Update(gameTime);  
             uI_Liv_Money.Update(gameTime);
 
             base.Update(gameTime);
@@ -100,7 +100,7 @@ namespace EksamensProjekt
             uI_Liv_Money.Draw(_spriteBatch);
 
             waveManager.Draw(gameTime, _spriteBatch);
-            //menu.Draw(_spriteBatch);
+            menu.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
