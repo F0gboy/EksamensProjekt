@@ -18,8 +18,8 @@ namespace EksamensProjekt.State_Pattern
                 if (!menu.clicked && mouseState.LeftButton == ButtonState.Pressed)
                 {
                     menu.clicked = true;
-                // Names 
-                if (menu.registration==false  && menu.firstButton.Contains(mouseState.Position))
+                    // Names 
+                    if (menu.registration==false  && menu.firstButton.Contains(mouseState.Position))
                     {
                     
                         menu.registrationTextName = "";
@@ -36,18 +36,16 @@ namespace EksamensProjekt.State_Pattern
                     // Enter
                     else if (menu.thirdButton.Contains(mouseState.Position))
                     {
-                        // Logic for the database
-
-
-                        if (!string.IsNullOrWhiteSpace(menu.stringName.ToString()) && !string.IsNullOrWhiteSpace(menu.stringPassword.ToString()))
+                        if (!string.IsNullOrEmpty(menu.stringName.ToString()) && !string.IsNullOrEmpty(menu.stringPassword.ToString()))
                         {
-
-                            menu.GameState(new StartGame_State_Menu());
-
+                            if (Database.DatabaseManager.RegisterUser(menu.stringName, menu.stringPassword) == true)
+                            {
+                                menu.GameState(new StartGame_State_Menu());
+                            }                            
                         }
-
                     }
                 }
+
                 if (mouseState.LeftButton != ButtonState.Pressed)
                     menu.clicked = false;
 

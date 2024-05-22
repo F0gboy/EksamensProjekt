@@ -1,5 +1,6 @@
 ﻿using EksamensProjekt.DesignPatterns.ComponentPattern;
 using EksamensProjekt.MapGeneration;
+using EksamensProjekt.State_Pattern;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -19,6 +20,8 @@ namespace EksamensProjekt
         private Texture2D enemyTexture;
         private UI_liv_money uI_Liv_Money;
         private GraphicsDevice _graphicsDevice;
+        private StartGame_State_Menu startGameState;
+
         public GameWorld()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -52,11 +55,15 @@ namespace EksamensProjekt
             uI_Liv_Money = new UI_liv_money(Content);
             Globals.Content = Content;
 
+            Texture2D normalEnemyTexture = Content.Load<Texture2D>("sæl");
+            Texture2D strongEnemyTexture = Content.Load<Texture2D>("orca");
+
             _gameManager = new GameManager();
-            enemyTexture = Content.Load<Texture2D>("sæl");
+            List<Vector2> pathPoints = _gameManager.PathPoints;
 
-            waveManager = new WaveManager(enemyTexture, _gameManager.PathPoints, 10, 1f, 100f);
+            waveManager = new WaveManager(normalEnemyTexture, strongEnemyTexture, pathPoints, 1.0f, 100f, 7.0f); // Adjust timeBetweenSpawns, enemySpeed, and timeBetweenWaves as needed
 
+            startGameState = new StartGame_State_Menu();
 
             base.Initialize();
 
@@ -76,15 +83,16 @@ namespace EksamensProjekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            Globals.Update(gameTime);
 
             _gameManager.Update();
-            Globals.Update(gameTime);
-            waveManager.Update(gameTime);
 
-            // TODO: Add your update logic here
-
-            menu.Update(gameTime);  
+            if (startGameState.GameStart)
+            {
+                waveManager.Update(gameTime);
+            }
             uI_Liv_Money.Update(gameTime);
+            menu.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -97,10 +105,14 @@ namespace EksamensProjekt
 
             _gameManager.Draw();
 
-            uI_Liv_Money.Draw(_spriteBatch);
+            if (startGameState.GameStart)
+            {
+                waveManager.Draw(gameTime, _spriteBatch);
+            }
 
-            waveManager.Draw(gameTime, _spriteBatch);
+            uI_Liv_Money.Draw(_spriteBatch);
             menu.Draw(_spriteBatch);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
