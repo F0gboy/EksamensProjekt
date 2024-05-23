@@ -81,6 +81,8 @@ namespace EksamensProjekt.Database
                     PlayerPasswordHash = HashPassword(password)
                 };
 
+                //lav loginId så det starter med 1 og går op for hver bruger der bliver oprettet
+
                 loginsystems.Insert(loginsystem);
                 return true;
             }
