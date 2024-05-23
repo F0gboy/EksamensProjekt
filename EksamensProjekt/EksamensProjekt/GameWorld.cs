@@ -63,7 +63,7 @@ namespace EksamensProjekt
             _gameManager = new GameManager();
             List<Vector2> pathPoints = _gameManager.PathPoints;
 
-            waveManager = new WaveManager(normalEnemyTexture, strongEnemyTexture, pathPoints, 1.0f, 100f, 7.0f); // Adjust timeBetweenSpawns, enemySpeed, and timeBetweenWaves as needed
+            waveManager = new WaveManager(normalEnemyTexture, strongEnemyTexture, pathPoints, 1.0f, 60f, 7.0f); // Adjust timeBetweenSpawns, enemySpeed, and timeBetweenWaves as needed
 
             base.Initialize();
 
@@ -83,15 +83,15 @@ namespace EksamensProjekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            Globals.Update(gameTime);
-
             _gameManager.Update();
 
             if (Globals.gameStarted)
             {
+                Globals.Update(gameTime);
                 waveManager.Update(gameTime);
+                Globals.gameTime = gameTime;
             }
-
+            
             uI_Liv_Money.Update(gameTime);
             menu.Update(gameTime);
 

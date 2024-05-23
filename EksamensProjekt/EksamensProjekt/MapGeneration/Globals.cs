@@ -18,6 +18,8 @@ namespace EksamensProjekt.MapGeneration
 
         public static bool gameStarted { get; set; }
 
+        public static GameTime gameTime { get; set; }
+
         public static void Update(GameTime gt)
         {
             Time = (float)gt.ElapsedGameTime.TotalSeconds;
