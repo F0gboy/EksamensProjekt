@@ -86,7 +86,7 @@ namespace EksamensProjekt.State_Pattern
                 Vector2 textName = new Vector2(menu.firstButton.Center.X - menu.font.MeasureString("Name").Length() + 50 , menu.firstButton.Center.Y - menu.font.MeasureString("Name").Y / 2);
                 Vector2 textPassword = new Vector2(menu.secondButton.Center.X - menu.font.MeasureString("Password").Length() + 80, menu.secondButton.Center.Y - menu.font.MeasureString("Login").Y / 2);
 
-                spriteBatch.DrawString(menu.secondFont, "" + menu.stringName.ToString(), textName, Color.White);
+                spriteBatch.DrawString(menu.secondFont, ""+ menu.stringName.ToString(), textName, Color.White);
                 spriteBatch.DrawString(menu.secondFont, "" + menu.stringPassword.ToString(), textPassword, Color.White);
 
             }
