@@ -75,14 +75,20 @@ namespace EksamensProjekt.Database
                     return false;
                 }
 
+                int newLoginId = 1;
+                var highestLoginIDUser = loginsystems.FindAll().OrderByDescending(x => x.LoginId).FirstOrDefault();
+                if (highestLoginIDUser != null)
+                {
+                    newLoginId = highestLoginIDUser.LoginId + 1;
+                }
+
                 var loginsystem = new LoginSystem
                 {
+                    LoginId = newLoginId,
                     PlayerName = playername,
                     PlayerPasswordHash = HashPassword(password)
-                };
-
-                //lav loginId så det starter med 1 og går op for hver bruger der bliver oprettet
-
+                };               
+                
                 loginsystems.Insert(loginsystem);
                 return true;
             }
