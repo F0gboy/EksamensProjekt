@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EksamensProjekt.MapGeneration;
 using Microsoft.Xna.Framework.Input;
 
 namespace EksamensProjekt.State_Pattern
@@ -69,21 +70,21 @@ namespace EksamensProjekt.State_Pattern
             {
 
                 spriteBatch.Draw(menu.background, Vector2.Zero, Color.White);
-                spriteBatch.Draw(menu.button, new Vector2(menu.firstButton.Center.X - menu.button.Width, menu.firstButton.Center.Y - menu.button.Height / 2), Color.White);
-                spriteBatch.Draw(menu.button, new Vector2(menu.secondButton.Center.X - menu.button.Width, menu.secondButton.Center.Y - menu.button.Height / 2), Color.White);
-                spriteBatch.Draw(menu.button, new Vector2(menu.thirdButton.Center.X - menu.button.Width, menu.thirdButton.Center.Y - menu.button.Height / 2), Color.White);
+                spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95 , Globals.WindowSize.Y / 2), Color.White);
+                spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, Globals.WindowSize.Y / 2 + 100), Color.White);
+                spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, Globals.WindowSize.Y / 2 + 200), Color.White);
 
-                Vector2 registrationTextPosition = new Vector2(menu.firstButton.Center.X - menu.font.MeasureString("Name").Length() - 45, menu.firstButton.Center.Y - menu.font.MeasureString("Registration").Y / 2);
-                Vector2 loginTextPosition = new Vector2(menu.secondButton.Center.X - menu.font.MeasureString("Password").Length() - 25, menu.secondButton.Center.Y - menu.font.MeasureString("Login").Y / 2);
-                Vector2 thirdButtonTextPosition = new Vector2(menu.thirdButton.Center.X - menu.font.MeasureString("Save").Length() - 50, menu.thirdButton.Center.Y - menu.font.MeasureString("Save").Y / 2);
+                Vector2 registrationTextPosition = new Vector2(menu.firstButton.Center.X - menu.font.MeasureString("Name").Length() + 50, menu.firstButton.Center.Y - menu.font.MeasureString("Registration").Y / 2);
+                Vector2 loginTextPosition = new Vector2(menu.secondButton.Center.X - menu.font.MeasureString("Password").Length() + 70, menu.secondButton.Center.Y - menu.font.MeasureString("Login").Y / 2);
+                Vector2 thirdButtonTextPosition = new Vector2(menu.thirdButton.Center.X - menu.font.MeasureString("Save").Length() + 40, menu.thirdButton.Center.Y - menu.font.MeasureString("Save").Y / 2);
 
                 spriteBatch.DrawString(menu.font, menu.registrationTextName, registrationTextPosition, Color.White);
                 spriteBatch.DrawString(menu.font, menu.registrationTextPassword, loginTextPosition, Color.White);
                 spriteBatch.DrawString(menu.font, "Save", thirdButtonTextPosition, Color.White);
 
                 // Users input
-                Vector2 textName = new Vector2(menu.firstButton.Center.X - menu.font.MeasureString("Name").Length() - 45, menu.firstButton.Center.Y - menu.font.MeasureString("Name").Y / 2);
-                Vector2 textPassword = new Vector2(menu.secondButton.Center.X - menu.font.MeasureString("Password").Length() - 25, menu.secondButton.Center.Y - menu.font.MeasureString("Login").Y / 2);
+                Vector2 textName = new Vector2(menu.firstButton.Center.X - menu.font.MeasureString("Name").Length() + 50 , menu.firstButton.Center.Y - menu.font.MeasureString("Name").Y / 2);
+                Vector2 textPassword = new Vector2(menu.secondButton.Center.X - menu.font.MeasureString("Password").Length() + 80, menu.secondButton.Center.Y - menu.font.MeasureString("Login").Y / 2);
 
                 spriteBatch.DrawString(menu.secondFont, "" + menu.stringName.ToString(), textName, Color.White);
                 spriteBatch.DrawString(menu.secondFont, "" + menu.stringPassword.ToString(), textPassword, Color.White);

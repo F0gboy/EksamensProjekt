@@ -3,9 +3,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Text;
+using EksamensProjekt.MapGeneration;
+
+
 namespace EksamensProjekt
 {
-    public class Menu
+public class Menu
     {
         private I_State_Menu currentState;
         public Texture2D background;
@@ -28,6 +33,8 @@ namespace EksamensProjekt
         public bool checkLogin;
         public string stringName = string.Empty;
         public string stringPassword = string.Empty;
+        //public StringBuilder stringName= new StringBuilder();
+        //public StringBuilder stringPassword= new StringBuilder();
         public KeyboardState currentKeyboardState;
         public KeyboardState previousKeyboardState;
         public MouseState mouseState = Mouse.GetState();
@@ -41,28 +48,33 @@ namespace EksamensProjekt
             font = contentManager.Load<SpriteFont>("font");
             secondFont = contentManager.Load<SpriteFont>("secondFont");
             
-            firstButton = new Rectangle (screenWidth / 2, screenHeight / 2,button.Width,button.Height);
-            secondButton = new Rectangle(screenWidth / 2,screenHeight/2+100, button.Width, button.Height);
-            thirdButton= new Rectangle(screenWidth/2, screenHeight/2+200, button.Width, button.Height);
-            startButton= new Rectangle(screenWidth / 2,10, button.Width, button.Height);
+            firstButton = new Rectangle(Globals.WindowSize.X / 2 - 100, Globals.WindowSize.Y / 2,button.Width,button.Height);
+            secondButton = new Rectangle(Globals.WindowSize.X / 2 - 100,Globals.WindowSize.Y /2+100, button.Width, button.Height);
+            thirdButton= new Rectangle(Globals.WindowSize.X / 2 - 100, Globals.WindowSize.Y /2+200, button.Width, button.Height);
+            startButton= new Rectangle(Globals.WindowSize.X / 2 - 100,10, button.Width, button.Height);
             currentState =new Main_State_Menu();
         }
         public void GameState (I_State_Menu newState)
         {
             currentState= newState;
         }
-       
         public void Update(GameTime gameTime)
         {
-
+            mouseState = Mouse.GetState();
             currentState.Update(this, gameTime);
+            previousKeyboardState = currentKeyboardState;
         }
+        //public void Update(GameTime gameTime)
+        //{
+
+        //    currentState.Update(this,gameTime);
+        //}
         public void Draw(SpriteBatch spriteBatch)
         {
           currentState.Draw(this, spriteBatch);
         }
 
-        public void HandleInput( ref string input)
+        public void HandleInput(ref string input)
         {
             currentKeyboardState = Keyboard.GetState();
 
@@ -92,5 +104,35 @@ namespace EksamensProjekt
             }
             previousKeyboardState = currentKeyboardState;
         }
+        //public void HandleInput(StringBuilder input)
+        //{
+        //    currentKeyboardState = previousKeyboardState;
+        //    currentKeyboardState = Keyboard.GetState();
+
+        //    Keys[] keys= currentKeyboardState.GetPressedKeys();
+
+        //    foreach( Keys key in keys)
+        //    {
+        //        if (previousKeyboardState.IsKeyUp(key))
+        //        {
+        //            if (key == Keys.Back && input.Length > 0)
+        //            {
+        //                input.Remove(input.Length - 1, 1);
+        //            }
+        //            else if (key >= Keys.A && key <= Keys.Z) 
+        //            {
+        //                input.Append(key.ToString().ToLower());
+        //            }
+        //            else if (key>= Keys.D0 && key <= Keys.D9)
+        //            {
+        //                input.Append(key.ToString().Substring(1));
+        //            }
+        //            else if (key == Keys.Space)
+        //            {
+        //                input.Append(' ');
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

@@ -16,6 +16,8 @@ namespace EksamensProjekt.MapGeneration
         public static SpriteBatch SpriteBatch { get; set; }
         public static Point WindowSize { get; set; }
 
+        public static bool gameStarted { get; set; }
+
         public static void Update(GameTime gt)
         {
             Time = (float)gt.ElapsedGameTime.TotalSeconds;
