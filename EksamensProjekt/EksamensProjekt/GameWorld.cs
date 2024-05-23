@@ -44,10 +44,12 @@ namespace EksamensProjekt
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            menu  = new Menu(GraphicsDevice, Content);
             // buildMenu  = new BuildMenu(GraphicsDevice, Content);
 
             Globals.WindowSize = new(1920, 1080);
+
+            menu = new Menu(GraphicsDevice, Content);
+
             //_graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
             //_graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
             _graphics.IsFullScreen = false;

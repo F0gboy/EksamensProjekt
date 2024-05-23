@@ -47,8 +47,8 @@ namespace EksamensProjekt.State_Pattern
             if (!gameStart)
             {
                 //spriteBatch.Draw(menu.background, Vector2.Zero, Color.White);
-                spriteBatch.Draw(menu.button, new Vector2(menu.startButton.Center.X - menu.button.Width, menu.startButton.Center.Y - menu.button.Height / 2), Color.White);
-                Vector2 registrationTextPosition = new Vector2(menu.startButton.Center.X - menu.font.MeasureString("Start").Length() - 45, menu.startButton.Center.Y - menu.font.MeasureString("Start").Y / 2);
+                spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, 10), Color.White);
+                Vector2 registrationTextPosition = new Vector2(Globals.WindowSize.X / 2 + 95 - menu.font.MeasureString("Start").Length() - 45, menu.startButton.Center.Y - menu.font.MeasureString("Start").Y / 2);
                 textPos = new Vector2(registrationTextPosition.X - 49, registrationTextPosition.Y);
                 spriteBatch.DrawString(menu.font, "Start/Pause", textPos, Color.White);
             }

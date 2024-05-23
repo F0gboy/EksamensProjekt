@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Text;
+using EksamensProjekt.MapGeneration;
 
 
 namespace EksamensProjekt
@@ -47,10 +48,10 @@ public class Menu
             font = contentManager.Load<SpriteFont>("font");
             secondFont = contentManager.Load<SpriteFont>("secondFont");
             
-            firstButton = new Rectangle (screenWidth / 2, screenHeight / 2,button.Width,button.Height);
-            secondButton = new Rectangle(screenWidth / 2,screenHeight/2+100, button.Width, button.Height);
-            thirdButton= new Rectangle(screenWidth/2, screenHeight/2+200, button.Width, button.Height);
-            startButton= new Rectangle(screenWidth / 2,10, button.Width, button.Height);
+            firstButton = new Rectangle(Globals.WindowSize.X / 2 - 100, Globals.WindowSize.Y / 2,button.Width,button.Height);
+            secondButton = new Rectangle(Globals.WindowSize.X / 2 - 100,Globals.WindowSize.Y /2+100, button.Width, button.Height);
+            thirdButton= new Rectangle(Globals.WindowSize.X / 2 - 100, Globals.WindowSize.Y /2+200, button.Width, button.Height);
+            startButton= new Rectangle(Globals.WindowSize.X / 2 - 100,10, button.Width, button.Height);
             currentState =new Main_State_Menu();
         }
         public void GameState (I_State_Menu newState)

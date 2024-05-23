@@ -26,7 +26,8 @@ namespace EksamensProjekt
         private int strongEnemyThreshold;
         private bool waveInProgress;
         private int totalEnemiesSpawned;
-
+        private int strongEnemiesCount;
+        private readonly object enemyListLock = new object(); // Lock for thread safety
 
         public WaveManager(Texture2D normalEnemyTexture, Texture2D strongEnemyTexture, List<Vector2> pathPoints, float timeBetweenSpawns, float enemySpeed, float timeBetweenWaves)
         {
@@ -44,6 +45,7 @@ namespace EksamensProjekt
             this.waveInProgress = true;
             this.timeBetweenWaves = timeBetweenWaves;
             this.totalEnemiesSpawned = 0; // Initialize total enemies spawned
+            this.strongEnemiesCount = 0; // Initialize strong enemies count
         }
 
         public void Update(GameTime gameTime)
@@ -54,17 +56,20 @@ namespace EksamensProjekt
 
                 if (spawnTimer >= timeBetweenSpawns && totalEnemiesSpawned < enemiesPerWave)
                 {
-                    SpawnEnemy();
+                    Task.Run(() => SpawnEnemy());
                     spawnTimer = 0f;
                     totalEnemiesSpawned++;
                 }
 
-                for (int i = enemies.Count - 1; i >= 0; i--)
+                lock (enemyListLock)
                 {
-                    enemies[i].Update(gameTime);
-                    if (enemies[i].HasPassed || enemies[i].IsDead)
+                    for (int i = enemies.Count - 1; i >= 0; i--)
                     {
-                        enemies.RemoveAt(i);
+                        enemies[i].Update(gameTime);
+                        if (enemies[i].HasPassed || enemies[i].IsDead)
+                        {
+                            enemies.RemoveAt(i);
+                        }
                     }
                 }
 
@@ -85,41 +90,46 @@ namespace EksamensProjekt
             }
         }
 
-        private bool AllEnemiesSpawnedAndPassed()
-        {
-            // Check if all enemies have either passed or been spawned
-            return enemies.Count == 0 && spawnTimer >= timeBetweenSpawns * enemiesPerWave;
-        }
-
         private void StartNextWave()
         {
             waveNumber++;
-            enemies.Clear();
+            lock (enemyListLock)
+            {
+                enemies.Clear();
+            }
             enemiesPerWave = baseEnemyCount + (waveNumber - 1) * 2; // Increase enemy count per wave
             enemySpeed += 0.5f; // Increase enemy speed for difficulty
             waveInProgress = true;
             spawnTimer = 0f; // Reset spawn timer for the new wave
             totalEnemiesSpawned = 0; // Reset total enemies spawned for the new wave
-        }
 
-        private bool WaveSpawned()
-        {
-            return enemies.Count > 0;
+            // Introduce strong enemies based on the wave number
+            if (waveNumber >= strongEnemyThreshold)
+            {
+                strongEnemiesCount = waveNumber - strongEnemyThreshold + 1; // Increase strong enemies count gradually
+            }
         }
 
         private void SpawnEnemy()
         {
             Vector2 spawnPosition = pathPoints[0];
-            bool isStrong = waveNumber >= strongEnemyThreshold && (waveNumber % 2 == 0); // Every 2 waves after threshold
+            bool isStrong = waveNumber >= strongEnemyThreshold && (totalEnemiesSpawned % (enemiesPerWave / (strongEnemiesCount + 1)) == 0); // Introduce strong enemies gradually
             Enemy newEnemy = enemyFactory.CreateEnemy(spawnPosition, new List<Vector2>(pathPoints), enemySpeed, 120f, isStrong);
-            enemies.Add(newEnemy);
+
+            lock (enemyListLock)
+            {
+                enemies.Add(newEnemy);
+            }
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            foreach (var enemy in enemies)
+            lock (enemyListLock)
             {
-                enemy.Draw(gameTime, spriteBatch);
+                foreach (var enemy in enemies)
+                {
+                    enemy.Draw(gameTime, spriteBatch);
+                }
             }
         }
 
