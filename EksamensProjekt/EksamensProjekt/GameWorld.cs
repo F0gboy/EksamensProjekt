@@ -63,8 +63,6 @@ namespace EksamensProjekt
 
             waveManager = new WaveManager(normalEnemyTexture, strongEnemyTexture, pathPoints, 1.0f, 100f, 7.0f); // Adjust timeBetweenSpawns, enemySpeed, and timeBetweenWaves as needed
 
-            startGameState = new StartGame_State_Menu();
-
             base.Initialize();
 
         }
@@ -74,7 +72,7 @@ namespace EksamensProjekt
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             Globals.SpriteBatch = _spriteBatch;
-
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -87,10 +85,11 @@ namespace EksamensProjekt
 
             _gameManager.Update();
 
-            if (startGameState.GameStart)
+            if (Globals.gameStarted)
             {
                 waveManager.Update(gameTime);
             }
+
             uI_Liv_Money.Update(gameTime);
             menu.Update(gameTime);
 
@@ -105,10 +104,7 @@ namespace EksamensProjekt
 
             _gameManager.Draw();
 
-            if (startGameState.GameStart)
-            {
-                waveManager.Draw(gameTime, _spriteBatch);
-            }
+            waveManager.Draw(gameTime, _spriteBatch);
 
             uI_Liv_Money.Draw(_spriteBatch);
             menu.Draw(_spriteBatch);

@@ -11,7 +11,10 @@ namespace EksamensProjekt.State_Pattern
 {
     public class StartGame_State_Menu: I_State_Menu
     {
+
         private bool gameStart;
+
+        public Vector2 textPos;
 
         public bool GameStart
         {
@@ -25,17 +28,12 @@ namespace EksamensProjekt.State_Pattern
             {
                 menu.clicked= true;
                
-                    if (menu.startButton.Contains(mouseState.Position))
-                    {
-                        gameStart = true;
-                    }
-                
-            }
-                if( mouseState.LeftButton != ButtonState.Pressed )
-                {
-                    gameStart = true;
+                if (menu.startButton.Contains(mouseState.Position))
+                { 
+                    Globals.gameStarted = !Globals.gameStarted;
+                    
                 }
-        
+            }
 
             if (mouseState.LeftButton != ButtonState.Pressed)
             {
@@ -50,7 +48,8 @@ namespace EksamensProjekt.State_Pattern
                 //spriteBatch.Draw(menu.background, Vector2.Zero, Color.White);
                 spriteBatch.Draw(menu.button, new Vector2(menu.startButton.Center.X - menu.button.Width, menu.startButton.Center.Y - menu.button.Height / 2), Color.White);
                 Vector2 registrationTextPosition = new Vector2(menu.startButton.Center.X - menu.font.MeasureString("Start").Length() - 45, menu.startButton.Center.Y - menu.font.MeasureString("Start").Y / 2);
-                spriteBatch.DrawString(menu.font, "Start", registrationTextPosition, Color.White);
+                textPos = new Vector2(registrationTextPosition.X - 49, registrationTextPosition.Y);
+                spriteBatch.DrawString(menu.font, "Start/Pause", textPos, Color.White);
             }
         }
     }
