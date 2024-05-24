@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EksamensProjekt.DesignPatterns.FactoryPatterns;
+using EksamensProjekt.MapGeneration;
 
 namespace EksamensProjekt
 {
@@ -27,7 +28,7 @@ namespace EksamensProjekt
         private bool waveInProgress;
         private int totalEnemiesSpawned;
         private int strongEnemiesCount;
-        private readonly object enemyListLock = new object(); // Lock for thread safety
+        private readonly object enemyListLock = new object();
 
         public WaveManager(Texture2D normalEnemyTexture, Texture2D strongEnemyTexture, List<Vector2> pathPoints, float timeBetweenSpawns, float enemySpeed, float timeBetweenWaves)
         {
@@ -41,11 +42,11 @@ namespace EksamensProjekt
             this.pathPoints = pathPoints;
             this.enemySpeed = enemySpeed;
             this.enemyFactory = new EnemyFactory(normalEnemyTexture, strongEnemyTexture);
-            this.strongEnemyThreshold = 5; // Start spawning strong enemies from wave 5
+            this.strongEnemyThreshold = 5; 
             this.waveInProgress = true;
             this.timeBetweenWaves = timeBetweenWaves;
-            this.totalEnemiesSpawned = 0; // Initialize total enemies spawned
-            this.strongEnemiesCount = 0; // Initialize strong enemies count
+            this.totalEnemiesSpawned = 0; 
+            this.strongEnemiesCount = 0; 
         }
 
         public void Update(GameTime gameTime)
@@ -69,6 +70,7 @@ namespace EksamensProjekt
                         if (enemies[i].HasPassed || enemies[i].IsDead)
                         {
                             enemies[i].Stop();
+                            Globals.life--;
                             enemies.RemoveAt(i);
                         }
                     }
@@ -102,23 +104,22 @@ namespace EksamensProjekt
                 }
                 enemies.Clear();
             }
-            enemiesPerWave = baseEnemyCount + (waveNumber - 1) * 2; // Increase enemy count per wave
-            enemySpeed += 0.5f; // Increase enemy speed for difficulty
+            enemiesPerWave = baseEnemyCount + (waveNumber - 1) * 2;
+            enemySpeed += 0.5f; 
             waveInProgress = true;
-            spawnTimer = 0f; // Reset spawn timer for the new wave
-            totalEnemiesSpawned = 0; // Reset total enemies spawned for the new wave
+            spawnTimer = 0f;
+            totalEnemiesSpawned = 0; 
 
-            // Introduce strong enemies based on the wave number
             if (waveNumber >= strongEnemyThreshold)
             {
-                strongEnemiesCount = waveNumber - strongEnemyThreshold + 1; // Increase strong enemies count gradually
+                strongEnemiesCount = waveNumber - strongEnemyThreshold + 1; 
             }
         }
 
         private void SpawnEnemy()
         {
-            Vector2 spawnPosition = pathPoints[0] + new Vector2(-10f, -10f); // Center the spawn position
-            bool isStrong = waveNumber >= strongEnemyThreshold && (totalEnemiesSpawned % (enemiesPerWave / (strongEnemiesCount + 1)) == 0); // Introduce strong enemies gradually
+            Vector2 spawnPosition = pathPoints[0] + new Vector2(-10f, -10f);
+            bool isStrong = waveNumber >= strongEnemyThreshold && (totalEnemiesSpawned % (enemiesPerWave / (strongEnemiesCount + 1)) == 0);
             Enemy newEnemy = enemyFactory.CreateEnemy(spawnPosition, new List<Vector2>(pathPoints), enemySpeed, 120f, isStrong);
 
             lock (enemyListLock)
