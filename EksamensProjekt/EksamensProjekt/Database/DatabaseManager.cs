@@ -87,7 +87,7 @@ namespace EksamensProjekt.Database
                     LoginId = newLoginId,
                     PlayerName = playername,
                     PlayerPasswordHash = HashPassword(password)
-                };               
+                };      
                 
                 loginsystems.Insert(loginsystem);
                 return true;
@@ -120,18 +120,6 @@ namespace EksamensProjekt.Database
 
                 return loginsystem.PlayerPasswordHash == passwordHash;
             }
-        }
-
-
-
-
-        public void Start()
-        {
-
-        }
-
-        
-
-        
+        }        
     }
 }
