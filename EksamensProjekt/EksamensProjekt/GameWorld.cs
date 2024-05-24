@@ -13,6 +13,7 @@ namespace EksamensProjekt
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Menu menu;
+        private BuildMenu buildMenu;
 
         private GameManager _gameManager;
         private WaveManager waveManager;
@@ -40,8 +41,8 @@ namespace EksamensProjekt
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            // menu  = new Menu(GraphicsDevice, Content);
-            // buildMenu  = new BuildMenu(GraphicsDevice, Content);
+            menu  = new Menu(GraphicsDevice, Content);
+            buildMenu  = new BuildMenu(GraphicsDevice, Content, _spriteBatch);
 
             Globals.WindowSize = new(1920, 1080);
             //_graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
@@ -82,8 +83,11 @@ namespace EksamensProjekt
 
             // TODO: Add your update logic here
 
-            //menu.Update(gameTime);  
-
+            menu.Update(gameTime);
+            if (menu.gameStart)
+            {
+               buildMenu.Update(gameTime);
+            }
             base.Update(gameTime);
         }
 
@@ -96,7 +100,13 @@ namespace EksamensProjekt
             _gameManager.Draw();
            
             waveManager.Draw(gameTime, _spriteBatch);
-            //menu.Draw(_spriteBatch);
+            menu.Draw(_spriteBatch);
+            if (menu.gameStart)
+            {
+            buildMenu.Draw(_spriteBatch);
+
+            }
+            
             _spriteBatch.End();
 
             base.Draw(gameTime);

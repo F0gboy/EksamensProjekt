@@ -34,6 +34,7 @@ public class Menu
         public KeyboardState currentKeyboardState;
         public KeyboardState previousKeyboardState;
         public MouseState mouseState = Mouse.GetState();
+        private GraphicsDevice graphicsDevice;
 
         int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         int screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
@@ -43,7 +44,9 @@ public class Menu
             button = contentManager.Load<Texture2D>("Button");
             font = contentManager.Load<SpriteFont>("font");
             secondFont = contentManager.Load<SpriteFont>("secondFont");
-            
+
+
+            this.graphicsDevice = graphicsDevice;
             firstButton = new Rectangle (screenWidth / 2, screenHeight / 2,button.Width,button.Height);
             secondButton = new Rectangle(screenWidth / 2,screenHeight/2+100, button.Width, button.Height);
             thirdButton= new Rectangle(screenWidth/2, screenHeight/2+200, button.Width, button.Height);
@@ -60,7 +63,11 @@ public class Menu
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-          currentState.Draw(this, spriteBatch);
+            currentState.Draw(this, spriteBatch);
+            DrawRectangle(firstButton, Color.Red, spriteBatch);
+            //DrawRectangle(secondButton, Color.Red, spriteBatch);
+            DrawRectangle(thirdButton, Color.Red, spriteBatch);
+          
         }
         public void HandleInput(StringBuilder input)
         {
@@ -92,5 +99,19 @@ public class Menu
                 }
             }
         }
+
+        private static Texture2D rect;
+        private void DrawRectangle(Rectangle coords, Color color, SpriteBatch spriteBatch)
+        {
+            if (rect == null)
+            {
+                rect = new Texture2D(graphicsDevice, 1, 1);
+                rect.SetData(new[] { Color.White });
+            }
+            spriteBatch.Draw(rect, coords, color);
+        }
+
     }
+
+
 }

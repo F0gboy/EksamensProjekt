@@ -22,6 +22,7 @@ namespace EksamensProjekt.State_Pattern
                     if (menu.firstButton.Contains(mouseState.Position))
                     {
                         gameStart = true;
+                        menu.gameStart = true;
                     }
                 
             }
