@@ -34,16 +34,13 @@ namespace EksamensProjekt.State_Pattern
                 // Enter
                 else if (menu.thirdButton.Contains(mouseState.Position))
                 {
-                    // Logic for the database
-
-
-                    if (!string.IsNullOrWhiteSpace(menu.stringName.ToString()) && !string.IsNullOrWhiteSpace(menu.stringPassword.ToString()))
+                    if (!string.IsNullOrEmpty(menu.stringName.ToString()) && !string.IsNullOrEmpty(menu.stringPassword.ToString()))
                     {
-
-                        menu.GameState(new StartGame_State_Menu());
-
+                        if (Database.DatabaseManager.LoginUser(menu.stringName, menu.stringPassword) == true)
+                        {
+                            menu.GameState(new StartGame_State_Menu());
+                        }
                     }
-
                 }
             }
                 if (mouseState.LeftButton != ButtonState.Pressed)
@@ -54,9 +51,9 @@ namespace EksamensProjekt.State_Pattern
                 {
                     menu.keyboardPressed = true;
                     if (menu.stringIsActiveName)
-                        menu.HandleInput(menu.stringName);
+                        menu.HandleInput(ref menu.stringName);////ref
                     else if (menu.stringIsActivePassword)
-                        menu.HandleInput(menu.stringPassword);
+                        menu.HandleInput(ref menu.stringPassword);///ref
                 }
                 else if (menu.currentKeyboardState.GetPressedKeyCount() < 1)
                     menu.keyboardPressed = false;
