@@ -68,6 +68,7 @@ namespace EksamensProjekt
                         enemies[i].Update(gameTime);
                         if (enemies[i].HasPassed || enemies[i].IsDead)
                         {
+                            enemies[i].Stop();
                             enemies.RemoveAt(i);
                         }
                     }
@@ -95,6 +96,10 @@ namespace EksamensProjekt
             waveNumber++;
             lock (enemyListLock)
             {
+                foreach (var enemy in enemies)
+                {
+                    enemy.Stop();
+                }
                 enemies.Clear();
             }
             enemiesPerWave = baseEnemyCount + (waveNumber - 1) * 2; // Increase enemy count per wave
@@ -112,7 +117,7 @@ namespace EksamensProjekt
 
         private void SpawnEnemy()
         {
-            Vector2 spawnPosition = pathPoints[0];
+            Vector2 spawnPosition = pathPoints[0] + new Vector2(-10f, -10f); // Center the spawn position
             bool isStrong = waveNumber >= strongEnemyThreshold && (totalEnemiesSpawned % (enemiesPerWave / (strongEnemiesCount + 1)) == 0); // Introduce strong enemies gradually
             Enemy newEnemy = enemyFactory.CreateEnemy(spawnPosition, new List<Vector2>(pathPoints), enemySpeed, 120f, isStrong);
 

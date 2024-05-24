@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EksamensProjekt.DesignPatterns.ComponentPattern;
+using EksamensProjekt.Towers;
 
 namespace EksamensProjekt
 {
@@ -22,13 +24,18 @@ namespace EksamensProjekt
         private Rectangle penguin3;
         private bool clicked;
         private bool buildActive;
+        private int buildInt;
         private GraphicsDevice graphicsDevice;
+        private ContentManager contentManager;
+        private SpriteBatch spriteBatch;
+
+        private List<Towers.GameObject> gameObjects = new List<Towers.GameObject>();
 
 
         int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         int screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-        public BuildMenu(GraphicsDevice graphicsDevice, ContentManager contentManager)
+        public BuildMenu(GraphicsDevice graphicsDevice, ContentManager contentManager, SpriteBatch spriteBatch)
         {
             background = contentManager.Load<Texture2D>("Background");
             button = contentManager.Load<Texture2D>("Button");
@@ -38,6 +45,8 @@ namespace EksamensProjekt
             penguin2 = new Rectangle(screenWidth - button.Width - (int)(button.Width * 1.75f / 2), screenHeight / 2 - 20-300 - (int)(1.75f * button.Height / 2), (int)(button.Width * 2.5f), (int)(button.Height * 2.5f));
             penguin3 = new Rectangle(screenWidth - button.Width - (int)(button.Width * 1.75f / 2), screenHeight / 2 - 20+300 - (int)(1.75f * button.Height / 2), (int)(button.Width*2.5f), (int)(button.Height * 2.5f));
             this.graphicsDevice = graphicsDevice;
+            this.contentManager = contentManager;
+            this.spriteBatch = spriteBatch;
 
 
         }
@@ -58,38 +67,70 @@ namespace EksamensProjekt
                         //build system
                         if (buildActive)
                         {
+                            buildInt = 0;
                             buildActive = !buildActive;
                         }
                         else
                         {
+                            buildInt = 1;
                             buildActive = true;
                         }
                         
                     }
 
-                    if (penguin2.Contains(mouseState.Position))
+                    else if (penguin2.Contains(mouseState.Position))
                     {
                         //build system
                         if (buildActive)
                         {
+                            buildInt = 0;
                             buildActive = !buildActive;
                         }
                         else
                         {
+                            buildInt = 2;
                             buildActive = true;
                         }
                     }
 
-                    if (penguin3.Contains(mouseState.Position))
+                    else if (penguin3.Contains(mouseState.Position))
                     {
                         //build system
                         if (buildActive)
                         {
+                            buildInt = 0;
                             buildActive = !buildActive;
                         }
                         else
                         {
+                            buildInt = 3;
                             buildActive = true;
+                        }
+                    }
+
+
+                    else if (buildActive)
+                    {
+                        buildActive = false;
+                        switch (buildInt)
+                        {
+                            case 1:
+                                gameObjects.Add(new BasicPenguin(graphicsDevice, contentManager, spriteBatch));
+                                break;
+
+                            case 2:
+
+                                break;
+
+                            case 3:
+
+                                break;
+
+
+
+
+                            default:
+                                break;
                         }
                     }
                 }
@@ -108,7 +149,7 @@ namespace EksamensProjekt
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(background, Vector2.Zero, Color.White);
+            //spriteBatch.Draw(background, Vector2.Zero, Color.White);
             spriteBatch.Draw(button, new Vector2(screenWidth-button.Width, screenHeight/2-20), null, Color.AliceBlue, 1.57079633f, new Vector2(button.Width / 2, button.Height / 2), 6, SpriteEffects.None, 0);
             //spriteBatch.Draw(button, new Vector2(buttonLogin.Center.X, buttonLogin.Center.Y), null, Color.White, 0, original, 1, SpriteEffects.None, 0);
             spriteBatch.Draw(button, new Vector2(screenWidth - button.Width, screenHeight / 2+20), null, Color.White, 0, new Vector2(button.Width / 2, button.Height / 2), 1.75f, SpriteEffects.None, 0);
@@ -127,7 +168,10 @@ namespace EksamensProjekt
             }
 
 
-
+            foreach (Towers.GameObject go in gameObjects)
+            {
+                go.Draw(spriteBatch);
+            }
             //DrawRectangle(penguin1, Color.Red, spriteBatch);
             //DrawRectangle(penguin2, Color.Red, spriteBatch);
             //DrawRectangle(penguin3, Color.Red, spriteBatch);
