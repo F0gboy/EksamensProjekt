@@ -98,10 +98,10 @@ namespace EksamensProjekt
             {
                 Globals.Update(gameTime);
                 waveManager.Update(gameTime);
+                uI_Liv_Money.Update(gameTime);
                 Globals.gameTime = gameTime;
             }
             
-            uI_Liv_Money.Update(gameTime);
             menu.Update(gameTime);
 
             base.Update(gameTime);
@@ -117,15 +117,12 @@ namespace EksamensProjekt
 
             waveManager.Draw(gameTime, _spriteBatch);
             menu.Draw(_spriteBatch);
+
             if (menu.gameStart)
             {
-            buildMenu.Draw(_spriteBatch);
-
+                buildMenu.Draw(_spriteBatch);
+                uI_Liv_Money.Draw(_spriteBatch);
             }
-            
-
-            uI_Liv_Money.Draw(_spriteBatch);
-            
 
             _spriteBatch.End();
 

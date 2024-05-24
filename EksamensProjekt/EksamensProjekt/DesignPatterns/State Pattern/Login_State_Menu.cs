@@ -40,6 +40,8 @@ namespace EksamensProjekt.State_Pattern
                         if (Database.DatabaseManager.LoginUser(menu.stringName, menu.stringPassword) == true)
                         {
                             menu.GameState(new StartGame_State_Menu());
+                            menu.gameStart = true;
+
                         }
                     }
                 }
