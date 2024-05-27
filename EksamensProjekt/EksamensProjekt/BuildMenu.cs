@@ -53,7 +53,10 @@ namespace EksamensProjekt
         public void Update(GameTime gameTime)
         {
             MouseState mouseState = Mouse.GetState();
-
+            foreach  (Towers.GameObject go in gameObjects)
+            {
+                go.Update(gameTime);
+            }
 
 
             // check if left button is pressed

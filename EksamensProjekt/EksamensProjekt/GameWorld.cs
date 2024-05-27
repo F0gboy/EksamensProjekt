@@ -89,13 +89,14 @@ namespace EksamensProjekt
 
             // TODO: Add your update logic here
 
-            menu.Update(gameTime);
             if (menu.gameStart)
             {
-               buildMenu.Update(gameTime);
+                buildMenu.Update(gameTime);
             }
+            menu.Update(gameTime);
             if (Globals.gameStarted)
             {
+                
                 Globals.Update(gameTime);
                 waveManager.Update(gameTime);
                 Globals.gameTime = gameTime;

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EksamensProjekt.DesignPatterns.ComponentPattern;
 
 namespace EksamensProjekt.MapGeneration
 {
@@ -15,6 +16,8 @@ namespace EksamensProjekt.MapGeneration
         public static ContentManager Content { get; set; }
         public static SpriteBatch SpriteBatch { get; set; }
         public static Point WindowSize { get; set; }
+
+        public static List<Enemy> enemies;
 
         public static bool gameStarted { get; set; }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EksamensProjekt.DesignPatterns.FactoryPatterns;
+using EksamensProjekt.MapGeneration;
 
 namespace EksamensProjekt
 {
@@ -50,6 +51,7 @@ namespace EksamensProjekt
 
         public void Update(GameTime gameTime)
         {
+            Globals.enemies = enemies;
             if (waveInProgress)
             {
                 spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;

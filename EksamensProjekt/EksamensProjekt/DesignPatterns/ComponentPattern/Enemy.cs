@@ -13,7 +13,7 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
     public class Enemy
     {
         private Texture2D texture;
-        private Vector2 position;
+        public Vector2 position;
         private List<Vector2> path;
         private int currentPathIndex;
         private float speed;
