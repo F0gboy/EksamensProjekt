@@ -92,7 +92,7 @@ namespace EksamensProjekt
             menu.Update(gameTime);
             if (menu.gameStart)
             {
-               buildMenu.Update(gameTime);
+               buildMenu.Update(gameTime, waveManager.GetEnemies());
             }
             if (Globals.gameStarted)
             {

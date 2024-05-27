@@ -6,26 +6,32 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using EksamensProjekt.DesignPatterns.ObserverPatterns;
 using EksamensProjekt.MapGeneration;
 
 namespace EksamensProjekt.DesignPatterns.ComponentPattern
 {
-    public class Enemy
+    public class Enemy : IObservable
     {
         private Texture2D texture;
-        private Vector2 position;
         private List<Vector2> path;
         private int currentPathIndex;
         private float speed;
         private float tileSize;
-        private int health;
+        public int health { get; private set; }
+
         private bool isRunning;
         private Thread updateThread;
+        public int value;
+        private List<IObserver> observers;
 
         public bool IsDead { get; private set; }
         public bool HasPassed { get; private set; }
 
-        public Enemy(Texture2D texture, Vector2 startPosition, List<Vector2> path, float speed, float tileSize, int health)
+        public float Radius { get; private set; }
+        public Vector2 position { get; private set; }
+
+        public Enemy(Texture2D texture, Vector2 startPosition, List<Vector2> path, float speed, float tileSize, int health, int value, float radius)
         {
             this.texture = texture;
             this.position = startPosition + new Vector2(tileSize / 2, tileSize / 2); // Center the enemy on the tile
@@ -35,13 +41,18 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
             this.tileSize = tileSize;
             this.health = health;
             this.IsDead = false;
-            this.HasPassed = false;
             this.isRunning = true;
+            this.Radius = radius;
+            IsDead = false;
+
             this.updateThread = new Thread(UpdateLoop)
             {
                 IsBackground = true // Set the thread as a background thread
             };
+
             this.updateThread.Start();
+            this.value = value;
+            this.observers = new List<IObserver>();
         }
 
         private void UpdateLoop()
@@ -75,6 +86,8 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
                 position = target; // Snap to target to avoid precision issues
                 currentPathIndex++;
             }
+
+            NotifyObservers();
         }
 
         public void Stop()
@@ -87,6 +100,38 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
         {
             spriteBatch.Draw(texture, position, Color.White);
         }
+
+        public void RegisterObserver(IObserver observer)
+        {
+            if (!observers.Contains(observer))
+            {
+                observers.Add(observer);
+            }
+        }
+
+        public void TakeDamage(int damage)
+        {
+            health -= damage;
+            if (health <= 0)
+            {
+                IsDead = true;
+            }
+        }
+
+        public void RemoveObserver(IObserver observer)
+        {
+            observers.Remove(observer);
+        }
+
+        public void NotifyObservers()
+        {
+            foreach (var observer in observers)
+            {
+                observer.Update(this);
+            }
+        }
+
+        public Vector2 Position => position;
     }
 }
 

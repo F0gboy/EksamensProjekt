@@ -42,15 +42,23 @@ namespace EksamensProjekt
             this.pathPoints = pathPoints;
             this.enemySpeed = enemySpeed;
             this.enemyFactory = new EnemyFactory(normalEnemyTexture, strongEnemyTexture);
-            this.strongEnemyThreshold = 5; 
+            this.strongEnemyThreshold = 5;
             this.waveInProgress = true;
             this.timeBetweenWaves = timeBetweenWaves;
-            this.totalEnemiesSpawned = 0; 
-            this.strongEnemiesCount = 0; 
+            this.totalEnemiesSpawned = 0;
+            this.strongEnemiesCount = 0;
         }
 
         public void Update(GameTime gameTime)
         {
+            foreach (Enemy enemy in enemies)
+            {
+                if (enemy.HasPassed)
+                {
+                    Globals.life -= enemy.value;
+                }
+            }
+
             if (waveInProgress)
             {
                 spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -64,13 +72,21 @@ namespace EksamensProjekt
 
                 lock (enemyListLock)
                 {
+                    foreach (var enemy in enemies)
+                    {
+                        enemy.Update(gameTime);
+                        if (enemy.HasPassed || enemy.IsDead)
+                        {
+                            enemy.Stop();
+                        }
+                    }
+
                     for (int i = enemies.Count - 1; i >= 0; i--)
                     {
                         enemies[i].Update(gameTime);
                         if (enemies[i].HasPassed || enemies[i].IsDead)
                         {
                             enemies[i].Stop();
-                            Globals.life--;
                             enemies.RemoveAt(i);
                         }
                     }
@@ -91,6 +107,21 @@ namespace EksamensProjekt
                     StartNextWave();
                 }
             }
+
+            lock (enemyListLock)
+            {
+                foreach (var enemy in enemies)
+                {
+                    enemy.Update(gameTime);
+
+                    if (enemy.IsDead)
+                    {
+                        Globals.money += enemy.value;
+                    }
+                }
+
+                enemies.RemoveAll(e => e.IsDead);
+            }
         }
 
         private void StartNextWave()
@@ -105,14 +136,14 @@ namespace EksamensProjekt
                 enemies.Clear();
             }
             enemiesPerWave = baseEnemyCount + (waveNumber - 1) * 2;
-            enemySpeed += 0.5f; 
+            enemySpeed += 0.5f;
             waveInProgress = true;
             spawnTimer = 0f;
-            totalEnemiesSpawned = 0; 
+            totalEnemiesSpawned = 0;
 
             if (waveNumber >= strongEnemyThreshold)
             {
-                strongEnemiesCount = waveNumber - strongEnemyThreshold + 1; 
+                strongEnemiesCount = waveNumber - strongEnemyThreshold + 1;
             }
         }
 
@@ -128,6 +159,16 @@ namespace EksamensProjekt
             }
         }
 
+        public void OnEnemyKilled(Enemy enemy)
+        {
+            lock (enemyListLock)
+            {
+                enemies.Remove(enemy);
+            }
+
+            Globals.money += enemy.value;
+        }
+
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             lock (enemyListLock)
@@ -136,6 +177,14 @@ namespace EksamensProjekt
                 {
                     enemy.Draw(gameTime, spriteBatch);
                 }
+            }
+        }
+
+        public List<Enemy> GetEnemies()
+        {
+            lock (enemyListLock)
+            {
+                return new List<Enemy>(enemies);
             }
         }
 
