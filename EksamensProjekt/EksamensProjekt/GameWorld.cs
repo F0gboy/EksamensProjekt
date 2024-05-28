@@ -88,15 +88,15 @@ namespace EksamensProjekt
 
             // TODO: Add your update logic here
 
-            if (menu.gameStart)
+            if (menu.gameStart && Globals.life >= 0)
             {
                buildMenu.Update(gameTime, waveManager.GetEnemies());
-
             }
+
             menu.Update(gameTime);
+
             if (Globals.gameStarted)
             {
-                
                 Globals.Update(gameTime);
                 waveManager.Update(gameTime);
                 uI_Liv_Money.Update(gameTime);

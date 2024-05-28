@@ -10,7 +10,7 @@ using EksamensProjekt.DesignPatterns.ObserverPatterns;
 
 namespace EksamensProjekt.Towers
 {
-    public class Tank : IObserver
+    public class Tower : IObserver
     {
         private Vector2 position;
         private Texture2D texture;
@@ -25,7 +25,7 @@ namespace EksamensProjekt.Towers
         private readonly object enemiesLock = new object();
         private float rotation;
 
-        public Tank(Vector2 position, Texture2D texture, Texture2D projectileTexture, float projectileSpeed,
+        public Tower(Vector2 position, Texture2D texture, Texture2D projectileTexture, float projectileSpeed,
             int projectileDamage, float fireRate, float range)
         {
             this.position = position;

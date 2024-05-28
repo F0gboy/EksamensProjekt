@@ -31,7 +31,7 @@ namespace EksamensProjekt
         private SpriteBatch spriteBatch;
 
         private List<BasicPenguin> PinguObjects = new List<BasicPenguin>();
-        private List<Tank> TankObjects = new List<Tank>();
+        private List<Tower> TankObjects = new List<Tower>();
 
 
         int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
@@ -126,7 +126,7 @@ namespace EksamensProjekt
 
                             case 2:
 
-                                TankObjects.Add(new Tank(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("pingvintank2"), contentManager.Load<Texture2D>("Bullet"), 500, 10, 2, 500));
+                                TankObjects.Add(new Tower(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("pingvintank2"), contentManager.Load<Texture2D>("Bullet"), 500, 10, 3, 500));
                                 break;
 
                             case 3:
@@ -166,7 +166,7 @@ namespace EksamensProjekt
             }
 
 
-            foreach (Tank tank in TankObjects)
+            foreach (Tower tank in TankObjects)
             {
                 tank.Update(gameTime);
 
@@ -203,7 +203,7 @@ namespace EksamensProjekt
                 go.Draw(Globals.gameTime, spriteBatch);
             }
 
-            foreach (Tank tanks in TankObjects)
+            foreach (Tower tanks in TankObjects)
             {
                 tanks.Draw(Globals.gameTime, spriteBatch);
             }

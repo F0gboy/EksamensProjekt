@@ -24,7 +24,7 @@ namespace EksamensProjekt
             heartTexture = contentManager.Load<Texture2D>("heart");
             heartPosition = new Rectangle(250, 10, 80, 80);
             UIfont = contentManager.Load<SpriteFont>("font");
-            Globals.life = 100;
+            Globals.life = 1;
             Globals.money = 150;
         }
         public void Update(GameTime gameTime)
