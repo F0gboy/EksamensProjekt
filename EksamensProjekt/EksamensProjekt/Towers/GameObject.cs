@@ -11,20 +11,16 @@ namespace EksamensProjekt.Towers
 {
     abstract class GameObject
     {
-
         private SpriteBatch spriteBatch;
         private GraphicsDevice graphicsDevice; 
         private ContentManager contentManager;
         public Rectangle rect;
-
-
 
         public GameObject(GraphicsDevice graphicsDevice, ContentManager contentManager, SpriteBatch spriteBatch) 
         { 
             this.spriteBatch = spriteBatch;
             this.graphicsDevice = graphicsDevice;   
             this.contentManager = contentManager;
-
         }
 
         abstract public void Update(GameTime gameTime);

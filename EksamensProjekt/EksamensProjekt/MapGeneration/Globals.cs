@@ -26,6 +26,8 @@ namespace EksamensProjekt.MapGeneration
         public static int life { get; set; }
 
         public static int money { get; set; }
+        public static int totalMoney { get; set; }
+        public static int kills { get; set; }
 
         public static void Update(GameTime gt)
         {

@@ -52,6 +52,7 @@ namespace EksamensProjekt
         public void Update(GameTime gameTime)
         {
 
+
             Globals.enemies = enemies;
 
             foreach (Enemy enemy in enemies)
@@ -60,6 +61,21 @@ namespace EksamensProjekt
                 {
                     Globals.life -= enemy.value;
                 }
+            }
+
+            lock (enemyListLock)
+            {
+                foreach (var enemy in enemies)
+                {
+                    enemy.Update(gameTime);
+
+                    if (enemy.IsDead)
+                    {
+                        Globals.money += enemy.value;
+                    }
+                }
+
+                enemies.RemoveAll(e => e.IsDead);
             }
 
 
@@ -112,20 +128,6 @@ namespace EksamensProjekt
                 }
             }
 
-            lock (enemyListLock)
-            {
-                foreach (var enemy in enemies)
-                {
-                    enemy.Update(gameTime);
-
-                    if (enemy.IsDead)
-                    {
-                        Globals.money += enemy.value;
-                    }
-                }
-
-                enemies.RemoveAll(e => e.IsDead);
-            }
         }
 
         private void StartNextWave()
