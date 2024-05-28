@@ -13,14 +13,14 @@ namespace EksamensProjekt.State_Pattern
     public class StartGame_State_Menu: I_State_Menu
     {
 
-        private bool gameStart;
+        //private bool gameStart;
 
         public Vector2 textPos;
 
-        public bool GameStart
-        {
-            get { return gameStart; }
-        }
+        //public bool GameStart
+        //{
+        //    get { return gameStart; }
+        //}
 
         public void Update(Menu menu, GameTime gameTime)
         {
@@ -44,8 +44,8 @@ namespace EksamensProjekt.State_Pattern
 
         public void Draw(Menu menu, SpriteBatch spriteBatch)
         {
-            if (!gameStart)
-            {
+            //if (!gameStart)
+            //{
                 //spriteBatch.Draw(menu.background, Vector2.Zero, Color.White);
                 spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, 10), Color.White);
                 Vector2 registrationTextPosition = new Vector2(Globals.WindowSize.X / 2 + 95 - menu.font.MeasureString("Start").Length() - 45, menu.startButton.Center.Y - menu.font.MeasureString("Start").Y / 2);
