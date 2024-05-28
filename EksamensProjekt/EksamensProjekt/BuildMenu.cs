@@ -39,7 +39,7 @@ namespace EksamensProjekt
 
         public BuildMenu(GraphicsDevice graphicsDevice, ContentManager contentManager, SpriteBatch spriteBatch)
         {
-            background = contentManager.Load<Texture2D>("Background");
+            background = contentManager.Load<Texture2D>("Background 3");
             button = contentManager.Load<Texture2D>("Button");
             font = contentManager.Load<SpriteFont>("font");
             tile = contentManager.Load<Texture2D>("iceTile");
