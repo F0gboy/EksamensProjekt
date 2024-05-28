@@ -29,6 +29,10 @@ namespace EksamensProjekt.MapGeneration
         public static int totalMoney { get; set; }
         public static int kills { get; set; }
 
+        public static int normalEnemyHealth { get; set; }
+
+        public static int hardEnemyHealth { get; set; }
+
         public static void Update(GameTime gt)
         {
             Time = (float)gt.ElapsedGameTime.TotalSeconds;

@@ -72,7 +72,7 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
                 return;
             }
 
-            Vector2 target = path[currentPathIndex] + new Vector2(tileSize / 2 - 15, tileSize / 2 - 10); // Center the target position
+            Vector2 target = path[currentPathIndex] + new Vector2(tileSize / 2 - 30, tileSize / 2 - 10); // Center the target position
             Vector2 direction = target - position;
 
             if (direction.LengthSquared() > 0)

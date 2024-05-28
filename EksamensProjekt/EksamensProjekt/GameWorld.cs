@@ -64,7 +64,7 @@ namespace EksamensProjekt
             _gameManager = new GameManager();
             List<Vector2> pathPoints = _gameManager.PathPoints;
 
-            waveManager = new WaveManager(normalEnemyTexture, strongEnemyTexture, pathPoints, 1.0f, 60f, 4.0f); // Adjust timeBetweenSpawns, enemySpeed, and timeBetweenWaves as needed
+            waveManager = new WaveManager(normalEnemyTexture, strongEnemyTexture, pathPoints, 0.5f, 60f, 3.0f); // Adjust timeBetweenSpawns, enemySpeed, and timeBetweenWaves as needed
 
             base.Initialize();
 
