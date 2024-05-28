@@ -68,6 +68,10 @@ namespace EksamensProjekt.State_Pattern
                 else if (menu.stringIsActivePassword)
                     menu.HandleInput(ref menu.stringPassword);//ref
             }
+            else if (menu.currentKeyboardState.GetPressedKeyCount() < 1)
+                menu.keyboardPressed = false;
+
+            menu.previousKeyboardState = menu.currentKeyboardState;
         }
 
         public void Draw(Menu menu, SpriteBatch spriteBatch)
