@@ -31,7 +31,6 @@ namespace EksamensProjekt
         private SpriteBatch spriteBatch;
 
         private List<BasicPenguin> PinguObjects = new List<BasicPenguin>();
-        private List<Tank> TankObjects = new List<Tank>();
 
 
         int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
@@ -121,16 +120,29 @@ namespace EksamensProjekt
                         switch (buildInt)
                         {
                             case 1:
-                                PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("NormalPingvin"), contentManager.Load<Texture2D>("Bullet"), 500, 1, 0.2f, 500));
+                                if (Globals.money > 100)
+                                {
+                                PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("NormalPingvin"), contentManager.Load<Texture2D>("BulletS"), 500, 1, 1, 500));
+                                    Globals.money -= 100;
+                                }
                                 break;
 
                             case 2:
+                                if (Globals.money > 250)
+                                {
+                                PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("pingvintank2"), contentManager.Load<Texture2D>("Bullet"), 500, 10, 3, 500));
+                                    Globals.money -= 250;
 
-                                TankObjects.Add(new Tank(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("pingvintank2"), contentManager.Load<Texture2D>("Bullet"), 500, 10, 2, 500));
+                                }
                                 break;
 
                             case 3:
+                                if (Globals.money > 500)
+                                {
+                                PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("NormalPingvin"), contentManager.Load<Texture2D>("BulletS"), 500, 1, 0.2f, 500));
+                                    Globals.money -= 500;
 
+                                }
                                 break;
 
 
@@ -166,15 +178,7 @@ namespace EksamensProjekt
             }
 
 
-            foreach (Tank tank in TankObjects)
-            {
-                tank.Update(gameTime);
-
-                foreach (var enemy in enemies)
-                {
-                    tank.Update(enemy);
-                }
-            }
+           
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -187,9 +191,9 @@ namespace EksamensProjekt
             spriteBatch.Draw(button, new Vector2(screenWidth - button.Width, screenHeight / 2+320), null, Color.White, 0, new Vector2(button.Width / 2, button.Height / 2), 1.75f, SpriteEffects.None, 0);
             
             
-            spriteBatch.DrawString(font, "Penguin1", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin1").Length()*2.5f / 2, screenHeight / 2 - 25), Color.White, 0, new Vector2(0, 0), 2.5f, SpriteEffects.None, 0);
-            spriteBatch.DrawString(font, "Penguin2", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin2").Length()*2.5f / 2, screenHeight / 2 - 25 - 300), Color.White, 0, new Vector2(0, 0), 2.5f, SpriteEffects.None, 0);
-            spriteBatch.DrawString(font, "Penguin3", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin3").Length()*2.5f / 2, screenHeight / 2 - 25 + 300), Color.White, 0, new Vector2(0, 0), 2.5f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "Penguin\n   100$", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin").Length()*2.5f / 2, screenHeight / 2 - 25), Color.White, 0, new Vector2(0, 0), 2.5f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "Penguin Tank\n      250$", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin Tank").Length()*2.5f / 2, screenHeight / 2 - 25 - 300), Color.White, 0, new Vector2(0, 0), 2.5f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "Penguin gunner\n        500$", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin gunner").Length()*2.5f / 2, screenHeight / 2 - 25 + 300), Color.White, 0, new Vector2(0, 0), 2.5f, SpriteEffects.None, 0);
             
             MouseState mouseState = Mouse.GetState();
 
@@ -203,10 +207,7 @@ namespace EksamensProjekt
                 go.Draw(Globals.gameTime, spriteBatch);
             }
 
-            foreach (Tank tanks in TankObjects)
-            {
-                tanks.Draw(Globals.gameTime, spriteBatch);
-            }
+            
 
             //DrawRectangle(penguin1, Color.Red, spriteBatch);
             //DrawRectangle(penguin2, Color.Red, spriteBatch);

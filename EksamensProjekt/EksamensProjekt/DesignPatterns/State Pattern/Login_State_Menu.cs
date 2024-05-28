@@ -72,8 +72,8 @@ namespace EksamensProjekt.State_Pattern
                 spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, Globals.WindowSize.Y / 2 + 100), Color.White);
                 spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, Globals.WindowSize.Y / 2 + 200), Color.White);
 
-                Vector2 registrationTextPosition = new Vector2(menu.firstButton.Center.X - menu.font.MeasureString("Name").X + 40 , menu.firstButton.Center.Y - menu.font.MeasureString("Registration").Y / 2);
-                Vector2 loginTextPosition = new Vector2(menu.secondButton.Center.X - menu.font.MeasureString("Password").X + 65, menu.secondButton.Center.Y - menu.font.MeasureString("Login").Y / 2);
+                Vector2 registrationTextPosition = new Vector2(menu.firstButton.Center.X - menu.font.MeasureString(menu.registrationTextName).X + 40 , menu.firstButton.Center.Y - menu.font.MeasureString("Registration").Y / 2);
+                Vector2 loginTextPosition = new Vector2(menu.secondButton.Center.X - menu.font.MeasureString(menu.registrationTextPassword).X + 65, menu.secondButton.Center.Y - menu.font.MeasureString("Login").Y / 2);
                 Vector2 thirdButtonTextPosition = new Vector2(menu.thirdButton.Center.X - menu.font.MeasureString("Enter").X + 40, menu.thirdButton.Center.Y - menu.font.MeasureString("Enter").Y / 2);
 
                 spriteBatch.DrawString(menu.font, menu.registrationTextName, registrationTextPosition, Color.White);
