@@ -64,7 +64,7 @@ namespace EksamensProjekt
             _gameManager = new GameManager();
             List<Vector2> pathPoints = _gameManager.PathPoints;
 
-            waveManager = new WaveManager(normalEnemyTexture, strongEnemyTexture, pathPoints, 1.0f, 60f, 7.0f); // Adjust timeBetweenSpawns, enemySpeed, and timeBetweenWaves as needed
+            waveManager = new WaveManager(normalEnemyTexture, strongEnemyTexture, pathPoints, 1.0f, 60f, 4.0f); // Adjust timeBetweenSpawns, enemySpeed, and timeBetweenWaves as needed
 
             base.Initialize();
 
@@ -88,7 +88,7 @@ namespace EksamensProjekt
 
             // TODO: Add your update logic here
 
-            if (menu.gameStart && Globals.life >= 0)
+            if (menu.gameStart)
             {
                buildMenu.Update(gameTime, waveManager.GetEnemies());
             }

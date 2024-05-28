@@ -19,5 +19,6 @@ namespace EksamensProjekt
             Rotation = rotation;
             Scale = scale;
         }
+
     }
 }

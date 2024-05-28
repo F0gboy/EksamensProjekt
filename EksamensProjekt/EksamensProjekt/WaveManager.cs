@@ -51,83 +51,56 @@ namespace EksamensProjekt
 
         public void Update(GameTime gameTime)
         {
-
-
             Globals.enemies = enemies;
-
-            foreach (Enemy enemy in enemies)
-            {
-                if (enemy.HasPassed)
-                {
-                    Globals.life -= enemy.value;
-                }
-            }
 
             lock (enemyListLock)
             {
-                foreach (var enemy in enemies)
+                // Update each enemy and check if they have passed or are dead
+                for (int i = enemies.Count - 1; i >= 0; i--)
                 {
+                    var enemy = enemies[i];
                     enemy.Update(gameTime);
 
-                    if (enemy.IsDead)
+                    if (enemy.HasPassed)
                     {
-                        Globals.money += enemy.value;
+                        Globals.life -= enemy.value;
+                        enemies.RemoveAt(i);
+                    }
+                    else if (enemy.IsDead)
+                    {
+                        Globals.money += enemy.value * 10;
+                        enemies.RemoveAt(i);
                     }
                 }
 
-                enemies.RemoveAll(e => e.IsDead);
-            }
-
-
-            if (waveInProgress)
-            {
-                spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-                if (spawnTimer >= timeBetweenSpawns && totalEnemiesSpawned < enemiesPerWave)
+                // Spawn new enemies if the wave is in progress
+                if (waveInProgress)
                 {
-                    Task.Run(() => SpawnEnemy());
-                    spawnTimer = 0f;
-                    totalEnemiesSpawned++;
-                }
+                    spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                lock (enemyListLock)
-                {
-                    foreach (var enemy in enemies)
+                    if (spawnTimer >= timeBetweenSpawns && totalEnemiesSpawned < enemiesPerWave)
                     {
-                        enemy.Update(gameTime);
-                        if (enemy.HasPassed || enemy.IsDead)
-                        {
-                            enemy.Stop();
-                        }
+                        Task.Run(() => SpawnEnemy());
+                        spawnTimer = 0f;
+                        totalEnemiesSpawned++;
                     }
 
-                    for (int i = enemies.Count - 1; i >= 0; i--)
+                    if (totalEnemiesSpawned >= enemiesPerWave && enemies.Count == 0)
                     {
-                        enemies[i].Update(gameTime);
-                        if (enemies[i].HasPassed || enemies[i].IsDead)
-                        {
-                            enemies[i].Stop();
-                            enemies.RemoveAt(i);
-                        }
+                        waveInProgress = false;
+                        waveTimer = 0f;
                     }
                 }
-
-                if (totalEnemiesSpawned >= enemiesPerWave && enemies.Count == 0)
+                else
                 {
-                    waveInProgress = false;
-                    waveTimer = 0f;
+                    waveTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    if (waveTimer >= timeBetweenWaves)
+                    {
+                        StartNextWave();
+                    }
                 }
             }
-            else
-            {
-                waveTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-                if (waveTimer >= timeBetweenWaves)
-                {
-                    StartNextWave();
-                }
-            }
-
         }
 
         private void StartNextWave()
@@ -135,10 +108,6 @@ namespace EksamensProjekt
             waveNumber++;
             lock (enemyListLock)
             {
-                foreach (var enemy in enemies)
-                {
-                    enemy.Stop();
-                }
                 enemies.Clear();
             }
             enemiesPerWave = baseEnemyCount + (waveNumber - 1) * 2;
