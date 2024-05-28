@@ -1,5 +1,5 @@
-﻿using EksamensProjekt.MapGeneration;
 using Microsoft.Xna.Framework;
+﻿using EksamensProjekt.MapGeneration;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;

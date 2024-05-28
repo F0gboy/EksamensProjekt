@@ -30,7 +30,7 @@ namespace EksamensProjekt
         private ContentManager contentManager;
         private SpriteBatch spriteBatch;
 
-        private List<Towers.GameObject> gameObjects = new List<Towers.GameObject>();
+        private List<BasicPenguin> PinguObjects = new List<BasicPenguin>();
         private List<Tank> TankObjects = new List<Tank>();
 
 
@@ -55,6 +55,12 @@ namespace EksamensProjekt
         public void Update(GameTime gameTime, List<Enemy> enemies)
         {
             MouseState mouseState = Mouse.GetState();
+
+            foreach  (BasicPenguin go in PinguObjects)
+            {
+                go.Update(gameTime);
+            }
+
 
             // check if left button is pressed
             if (mouseState.LeftButton == ButtonState.Pressed)
@@ -115,7 +121,7 @@ namespace EksamensProjekt
                         switch (buildInt)
                         {
                             case 1:
-                                gameObjects.Add(new BasicPenguin(graphicsDevice, contentManager, spriteBatch));
+                                PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("NormalPingvin"), contentManager.Load<Texture2D>("Bullet"), 500, 1, 0.2f, 500));
                                 break;
 
                             case 2:
@@ -147,6 +153,18 @@ namespace EksamensProjekt
             {
 
             }
+
+
+            foreach (BasicPenguin go in PinguObjects)
+            {
+                go.Update(gameTime);
+
+                foreach (var enemy in enemies)
+                {
+                    go.Update(enemy);
+                }
+            }
+
 
             foreach (Tank tank in TankObjects)
             {
@@ -180,9 +198,9 @@ namespace EksamensProjekt
                  spriteBatch.Draw(tile, new Vector2(mouseState.Position.X, mouseState.Position.Y), null, Color.Green, 0, new Vector2(tile.Width / 2*0.5f, tile.Height / 2*0.5f), 0.5f, SpriteEffects.None, 0);
             }
 
-            foreach (Towers.GameObject go in gameObjects)
+            foreach (BasicPenguin go in PinguObjects)
             {
-                go.Draw(spriteBatch);
+                go.Draw(Globals.gameTime, spriteBatch);
             }
 
             foreach (Tank tanks in TankObjects)

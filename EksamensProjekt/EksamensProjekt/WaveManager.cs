@@ -51,6 +51,9 @@ namespace EksamensProjekt
 
         public void Update(GameTime gameTime)
         {
+
+            Globals.enemies = enemies;
+
             foreach (Enemy enemy in enemies)
             {
                 if (enemy.HasPassed)
@@ -58,6 +61,7 @@ namespace EksamensProjekt
                     Globals.life -= enemy.value;
                 }
             }
+
 
             if (waveInProgress)
             {
