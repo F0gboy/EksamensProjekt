@@ -24,11 +24,11 @@ namespace EksamensProjekt.DesignPatterns.FactoryPatterns
         {
             if (isStrong)
             {
-                return new Enemy(strongEnemyTexture, position, path, speed, tileSize, 100); // Strong enemy with more health
+                return new Enemy(strongEnemyTexture, position, path, speed, tileSize, 3, 5, 1); // Strong enemy with more health
             }
             else
             {
-                return new Enemy(normalEnemyTexture, position, path, speed, tileSize, 50); // Normal enemy
+                return new Enemy(normalEnemyTexture, position, path, speed, tileSize, 1, 1, 1); // Normal enemy
             }
         }
     }

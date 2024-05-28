@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EksamensProjekt.DesignPatterns.ComponentPattern;
+using EksamensProjekt.MapGeneration;
 using EksamensProjekt.Towers;
 
 namespace EksamensProjekt
@@ -29,7 +30,8 @@ namespace EksamensProjekt
         private ContentManager contentManager;
         private SpriteBatch spriteBatch;
 
-        private List<Towers.GameObject> gameObjects = new List<Towers.GameObject>();
+        private List<BasicPenguin> PinguObjects = new List<BasicPenguin>();
+        private List<Tank> TankObjects = new List<Tank>();
 
 
         int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
@@ -50,10 +52,11 @@ namespace EksamensProjekt
 
 
         }
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, List<Enemy> enemies)
         {
             MouseState mouseState = Mouse.GetState();
-            foreach  (Towers.GameObject go in gameObjects)
+
+            foreach  (BasicPenguin go in PinguObjects)
             {
                 go.Update(gameTime);
             }
@@ -118,11 +121,12 @@ namespace EksamensProjekt
                         switch (buildInt)
                         {
                             case 1:
-                                gameObjects.Add(new BasicPenguin(graphicsDevice, contentManager, spriteBatch));
+                                PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("NormalPingvin"), contentManager.Load<Texture2D>("Bullet"), 500, 1, 0.2f, 500));
                                 break;
 
                             case 2:
 
+                                TankObjects.Add(new Tank(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("pingvintank2"), contentManager.Load<Texture2D>("Bullet"), 500, 10, 2, 500));
                                 break;
 
                             case 3:
@@ -149,7 +153,30 @@ namespace EksamensProjekt
             {
 
             }
+
+
+            foreach (BasicPenguin go in PinguObjects)
+            {
+                go.Update(gameTime);
+
+                foreach (var enemy in enemies)
+                {
+                    go.Update(enemy);
+                }
+            }
+
+
+            foreach (Tank tank in TankObjects)
+            {
+                tank.Update(gameTime);
+
+                foreach (var enemy in enemies)
+                {
+                    tank.Update(enemy);
+                }
+            }
         }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.Draw(background, Vector2.Zero, Color.White);
@@ -165,16 +192,22 @@ namespace EksamensProjekt
             spriteBatch.DrawString(font, "Penguin3", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin3").Length()*2.5f / 2, screenHeight / 2 - 25 + 300), Color.White, 0, new Vector2(0, 0), 2.5f, SpriteEffects.None, 0);
             
             MouseState mouseState = Mouse.GetState();
+
             if (buildActive)
             {
-            spriteBatch.Draw(tile, new Vector2(mouseState.Position.X, mouseState.Position.Y), null, Color.Green, 0, new Vector2(tile.Width / 2*0.5f, tile.Height / 2*0.5f), 0.5f, SpriteEffects.None, 0);
+                 spriteBatch.Draw(tile, new Vector2(mouseState.Position.X, mouseState.Position.Y), null, Color.Green, 0, new Vector2(tile.Width / 2*0.5f, tile.Height / 2*0.5f), 0.5f, SpriteEffects.None, 0);
             }
 
-
-            foreach (Towers.GameObject go in gameObjects)
+            foreach (BasicPenguin go in PinguObjects)
             {
-                go.Draw(spriteBatch);
+                go.Draw(Globals.gameTime, spriteBatch);
             }
+
+            foreach (Tank tanks in TankObjects)
+            {
+                tanks.Draw(Globals.gameTime, spriteBatch);
+            }
+
             //DrawRectangle(penguin1, Color.Red, spriteBatch);
             //DrawRectangle(penguin2, Color.Red, spriteBatch);
             //DrawRectangle(penguin3, Color.Red, spriteBatch);
@@ -192,6 +225,5 @@ namespace EksamensProjekt
             }
             spriteBatch.Draw(rect, coords, color);
         }
-
     }
 }

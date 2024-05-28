@@ -23,6 +23,10 @@ namespace EksamensProjekt.MapGeneration
 
         public static GameTime gameTime { get; set; }
 
+        public static int life { get; set; }
+
+        public static int money { get; set; }
+
         public static void Update(GameTime gt)
         {
             Time = (float)gt.ElapsedGameTime.TotalSeconds;
