@@ -67,7 +67,6 @@ namespace EksamensProjekt
 
         public void Update()
         {
-            // Update logic goes here
             InputManager.Update();
             _map.Update();
         }

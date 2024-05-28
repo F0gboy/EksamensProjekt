@@ -110,7 +110,7 @@ namespace EksamensProjekt.Towers
             projectiles.RemoveAll(p => !p.IsActive);
         }
 
-        // IObserver Update method implementation
+        // Observer pattern
         public void Update(Enemy enemy)
         {
             lock (enemiesLock)
@@ -131,7 +131,7 @@ namespace EksamensProjekt.Towers
 
         private bool IsInBounds(Vector2 position)
         {
-            // Check if the projectile is within the game bounds, implement as needed
+            // Check if the projectile is within the game screen
             return true;
         }
     }

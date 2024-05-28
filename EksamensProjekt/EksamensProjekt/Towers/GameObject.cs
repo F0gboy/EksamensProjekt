@@ -17,8 +17,6 @@ namespace EksamensProjekt.Towers
         private ContentManager contentManager;
         public Rectangle rect;
 
-
-
         public GameObject(GraphicsDevice graphicsDevice, ContentManager contentManager, SpriteBatch spriteBatch) 
         { 
             this.spriteBatch = spriteBatch;

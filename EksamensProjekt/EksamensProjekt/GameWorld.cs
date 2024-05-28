@@ -52,10 +52,9 @@ namespace EksamensProjekt
 
             menu = new Menu(GraphicsDevice, Content);
 
-            //_graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
-            //_graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
             _graphics.IsFullScreen = false;
             _graphics.ApplyChanges();
+
             uI_Liv_Money = new UI_liv_money(Content);
             Globals.Content = Content;
 
