@@ -41,7 +41,7 @@ public class Menu
         int screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
         public Menu(GraphicsDevice graphicsDevice, ContentManager contentManager)
         {
-            background = contentManager.Load<Texture2D>("Background");
+            background = contentManager.Load<Texture2D>("Background 3");
             button = contentManager.Load<Texture2D>("Button");
             font = contentManager.Load<SpriteFont>("font");
             secondFont = contentManager.Load<SpriteFont>("secondFont");
