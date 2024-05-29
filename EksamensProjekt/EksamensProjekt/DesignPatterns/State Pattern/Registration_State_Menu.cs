@@ -25,7 +25,6 @@ namespace EksamensProjekt.State_Pattern
                 // Names 
                 if (menu.registration == false && menu.firstButton.Contains(mouseState.Position))
                 {
-
                     menu.registrationTextName = "";
                     menu.stringIsActiveName = true;
                     menu.stringIsActivePassword = false;
