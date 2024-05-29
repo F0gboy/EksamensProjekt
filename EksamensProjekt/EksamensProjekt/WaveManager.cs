@@ -128,12 +128,19 @@ namespace EksamensProjekt
             if (waveNumber >= strongEnemyThreshold)
             {
                 strongEnemiesCount = waveNumber - strongEnemyThreshold + 1;
+
+            }
+
+            if (waveNumber > 10)
+            {
+                Globals.hardEnemyHealth += 2;
+                Globals.normalEnemyHealth += 1;
             }
         }
 
         private void SpawnEnemy()
         {
-            Vector2 spawnPosition = pathPoints[0] + new Vector2(-30f, -10f);
+            Vector2 spawnPosition = pathPoints[0] + new Vector2(0f, 0f);
             bool isStrong = waveNumber >= strongEnemyThreshold && (totalEnemiesSpawned % (enemiesPerWave / (strongEnemiesCount + 1)) == 0);
             Enemy newEnemy = enemyFactory.CreateEnemy(spawnPosition, new List<Vector2>(pathPoints), enemySpeed, 120f, isStrong);
 
