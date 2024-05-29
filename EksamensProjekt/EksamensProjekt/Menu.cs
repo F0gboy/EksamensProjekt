@@ -43,7 +43,7 @@ public class Menu
         {
             background = contentManager.Load<Texture2D>("Background 3");
             button = contentManager.Load<Texture2D>("Button");
-            font = contentManager.Load<SpriteFont>("font");
+            font = contentManager.Load<SpriteFont>("UIfont");
             secondFont = contentManager.Load<SpriteFont>("secondFont");
             
             firstButton = new Rectangle(Globals.WindowSize.X / 2 - 100, Globals.WindowSize.Y / 2,button.Width,button.Height);
