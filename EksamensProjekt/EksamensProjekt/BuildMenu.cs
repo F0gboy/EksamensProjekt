@@ -122,7 +122,7 @@ namespace EksamensProjekt
                             case 1:
                                 if (Globals.money > 100)
                                 {
-                                PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("NormalPingvin"), contentManager.Load<Texture2D>("BulletS"), 500, 1, 1, 500));
+                                PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("p1"), contentManager.Load<Texture2D>("BulletS"), 500, 1, 1, 500));
                                     Globals.money -= 100;
                                 }
                                 break;
@@ -139,7 +139,7 @@ namespace EksamensProjekt
                             case 3:
                                 if (Globals.money > 500)
                                 {
-                                PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("NormalPingvin"), contentManager.Load<Texture2D>("BulletS"), 500, 1, 0.2f, 500));
+                                PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("p2"), contentManager.Load<Texture2D>("BulletS"), 500, 1, 0.2f, 500));
                                     Globals.money -= 500;
 
                                 }
