@@ -106,12 +106,14 @@ namespace EksamensProjekt
         private void StartNextWave()
         {
             waveNumber++;
+
             lock (enemyListLock)
             {
                 enemies.Clear();
             }
+
             enemiesPerWave = baseEnemyCount + (waveNumber - 1) * 2;
-            enemySpeed += 0.5f;
+            enemySpeed += 5f;
             waveInProgress = true;
             spawnTimer = 0f;
             totalEnemiesSpawned = 0;
@@ -124,7 +126,7 @@ namespace EksamensProjekt
 
         private void SpawnEnemy()
         {
-            Vector2 spawnPosition = pathPoints[0] + new Vector2(-10f, -10f);
+            Vector2 spawnPosition = pathPoints[0] + new Vector2(-30f, -10f);
             bool isStrong = waveNumber >= strongEnemyThreshold && (totalEnemiesSpawned % (enemiesPerWave / (strongEnemiesCount + 1)) == 0);
             Enemy newEnemy = enemyFactory.CreateEnemy(spawnPosition, new List<Vector2>(pathPoints), enemySpeed, 120f, isStrong);
 
