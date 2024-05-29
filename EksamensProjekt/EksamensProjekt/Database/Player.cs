@@ -9,11 +9,9 @@ namespace EksamensProjekt.Database
     internal class Player
     {
         public int PlayerId { get; set; }
-        public int Round { get; set; }
-        public int Kills { get; set; }
-        public int FishMoney { get; set; }
-        public int totalMoney { get; set; }
-        public string Name { get; set; }
-        public int TilesSeed { get; set; }
+        public int TotalRound { get; set; }
+        public int TotalKills { get; set; }        
+        public int TotalMoney { get; set; }
+        public int LoginId { get; set; }
     }
 }

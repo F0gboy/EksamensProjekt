@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using EksamensProjekt.MapGeneration;
 
 namespace EksamensProjekt.Database
 {
@@ -69,7 +70,7 @@ namespace EksamensProjekt.Database
             using (var db = new LiteDatabase(_connectionString))
             {
                 var loginsystems = db.GetCollection<LoginSystem>("loginsystems");
-
+                var players = db.GetCollection<Player>("players");
                 if (loginsystems.Exists(x => x.PlayerName == playername))
                 {
                     return false;
@@ -90,6 +91,25 @@ namespace EksamensProjekt.Database
                 };      
                 
                 loginsystems.Insert(loginsystem);
+
+                int newPlayerId = 1;
+                var highestPlayerIDUser = players.FindAll().OrderByDescending(x => x.PlayerId).FirstOrDefault();
+                if (highestPlayerIDUser != null)
+                {
+                    newPlayerId = highestPlayerIDUser.PlayerId + 1;
+                }
+
+                var player = new Player
+                {
+                    PlayerId = newPlayerId,
+                    LoginId = newLoginId,
+                    TotalMoney = 0,
+                    TotalKills = 0,
+                    TotalRound = 0
+                };
+
+                players.Insert(player);
+
                 return true;
             }
         }
@@ -106,6 +126,7 @@ namespace EksamensProjekt.Database
 
         public static bool LoginUser(string playername, string password)
         {
+            
             using (var db = new LiteDatabase(_connectionString))
             {
                 var loginsystems = db.GetCollection<LoginSystem>("loginsystems");
@@ -118,8 +139,48 @@ namespace EksamensProjekt.Database
 
                 var passwordHash = HashPassword(password);
 
+                if (loginsystem.PlayerPasswordHash == passwordHash)
+                {
+                    Globals.LoginId = loginsystem.LoginId;
+                }
+
                 return loginsystem.PlayerPasswordHash == passwordHash;
             }
-        }        
+        }
+
+        public static void UpdatePlayerStats(int loginId)
+        {
+            using (var db = new LiteDatabase(_connectionString))
+            {
+                var players = db.GetCollection<Player>("players");
+                var player = players.FindOne(p => p.LoginId == loginId);
+
+                if (player != null)
+                {
+                    player.TotalMoney += Globals.TotalMoney;
+                    player.TotalKills += Globals.TotalKills;
+                    player.TotalRound += Globals.TotalRounds;
+
+                    players.Update(player);
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+                Globals.TotalMoney = 0;
+                Globals.TotalKills = 0;
+                Globals.TotalRounds = 0;
+            }
+        }
+
+        public Player GetPlayerStats(int loginId)
+        {
+            using (var db = new LiteDatabase(_connectionString))
+            {
+                var players = db.GetCollection<Player>("players");
+                return players.FindOne(p => p.LoginId == loginId);
+            }
+        }
     }
 }

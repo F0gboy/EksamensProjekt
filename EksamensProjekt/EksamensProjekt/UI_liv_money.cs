@@ -35,9 +35,9 @@ namespace EksamensProjekt
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(fishTexture, fishPosition,Color.White);
-            spriteBatch.Draw(heartTexture, heartPosition,Color.White);
             spriteBatch.DrawString(UIfont, Globals.life.ToString(), new Vector2(350, 25), Color.Black, 0, Vector2.Zero, fontScale, SpriteEffects.None, 0);
             spriteBatch.DrawString(UIfont, Globals.money.ToString(), new Vector2(120, 25), Color.Black, 0, Vector2.Zero, fontScale, SpriteEffects.None, 0);
+            spriteBatch.Draw(heartTexture, heartPosition,Color.White);
 
         }
         public void Life() {Globals.life--;}

@@ -26,8 +26,14 @@ namespace EksamensProjekt.MapGeneration
         public static int life { get; set; }
 
         public static int money { get; set; }
-        public static int totalMoney { get; set; }
-        public static int kills { get; set; }
+
+        public static int TotalMoney { get; set; }
+
+        public static int TotalKills { get; set; }
+
+        public static int TotalRounds { get; set; }
+
+        public static int LoginId { get; set; }
 
         public static int normalEnemyHealth { get; set; }
 
