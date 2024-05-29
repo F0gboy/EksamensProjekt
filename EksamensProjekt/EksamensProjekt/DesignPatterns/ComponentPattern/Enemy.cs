@@ -30,11 +30,14 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
 
         public float Radius { get; private set; }
         public Vector2 position { get; private set; }
+        private float rotation; 
+        private float targetRotation; 
+        private float rotationSpeed = 3f; 
 
         public Enemy(Texture2D texture, Vector2 startPosition, List<Vector2> path, float speed, float tileSize, int health, int value, float radius)
         {
             this.texture = texture;
-            this.position = startPosition + new Vector2(tileSize / 2, tileSize / 2); // Center the enemy on the tile
+            this.position = startPosition + new Vector2(tileSize / 2, tileSize / 2); 
             this.path = path;
             this.currentPathIndex = 0;
             this.speed = speed;
@@ -72,18 +75,22 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
                 return;
             }
 
-            Vector2 target = path[currentPathIndex] + new Vector2(tileSize / 2 - 30, tileSize / 2 - 10); // Center the target position
+            Vector2 target = path[currentPathIndex] + new Vector2(tileSize / 2, tileSize / 2); 
             Vector2 direction = target - position;
 
             if (direction.LengthSquared() > 0)
             {
                 direction.Normalize();
                 position += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                targetRotation = (float)Math.Atan2(direction.Y, direction.X); 
             }
+
+            float rotationDifference = targetRotation - rotation;
+            rotation += MathHelper.Clamp(rotationDifference, -rotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds, rotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
             if (Vector2.DistanceSquared(position, target) < (speed * (float)gameTime.ElapsedGameTime.TotalSeconds) * (speed * (float)gameTime.ElapsedGameTime.TotalSeconds))
             {
-                position = target; // Snap to target to avoid precision issues
+                position = target; 
                 currentPathIndex++;
             }
 
@@ -98,7 +105,8 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            // Draw with rotation
+            spriteBatch.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), 1f, SpriteEffects.None, 0f);
         }
 
         public void RegisterObserver(IObserver observer)
