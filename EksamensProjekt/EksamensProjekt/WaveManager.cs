@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EksamensProjekt.DesignPatterns.FactoryPatterns;
 using EksamensProjekt.MapGeneration;
+using EksamensProjekt.Database;
 
 namespace EksamensProjekt
 {
@@ -65,10 +66,16 @@ namespace EksamensProjekt
                     {
                         Globals.life -= enemy.value;
                         enemies.RemoveAt(i);
+                        if (Globals.life <= 0)
+                        {
+                            DatabaseManager.UpdatePlayerStats(Globals.LoginId);
+                        }
                     }
                     else if (enemy.IsDead)
                     {
                         Globals.money += enemy.value * 10;
+                        Globals.TotalMoney += enemy.value * 10;
+                        Globals.TotalKills++;
                         enemies.RemoveAt(i);
                     }
                 }
@@ -106,7 +113,7 @@ namespace EksamensProjekt
         private void StartNextWave()
         {
             waveNumber++;
-
+            Globals.TotalRounds++;
             lock (enemyListLock)
             {
                 enemies.Clear();
