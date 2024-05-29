@@ -33,6 +33,7 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
         private float rotation; 
         private float targetRotation; 
         private float rotationSpeed = 3f; 
+        private Random random = new Random();
 
         public Enemy(Texture2D texture, Vector2 startPosition, List<Vector2> path, float speed, float tileSize, int health, int value, float radius)
         {
@@ -64,6 +65,7 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
             {
                 Update(Globals.gameTime);
                 Thread.Sleep(16); // Approximate 60 FPS update rate
+                Thread.Sleep(random.Next(1,5));
             }
         }
 

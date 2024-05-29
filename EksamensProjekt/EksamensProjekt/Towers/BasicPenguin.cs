@@ -74,7 +74,8 @@ namespace EksamensProjekt.Towers
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, position, null, Color.White, rotation,
+                new Vector2(texture.Width / 2, texture.Height / 2), 1f, SpriteEffects.None, 0f);
 
             foreach (var projectile in projectiles)
             {
@@ -88,7 +89,8 @@ namespace EksamensProjekt.Towers
             direction.Normalize();
             rotation = (float)Math.Atan2(direction.Y, direction.X) - MathHelper.PiOver2;
 
-            Projectile newProjectile = new Projectile(position, direction, projectileSpeed, projectileDamage, projectileTexture);
+            Projectile newProjectile =
+                new Projectile(position, direction, projectileSpeed, projectileDamage, projectileTexture);
             projectiles.Add(newProjectile);
         }
 
@@ -103,14 +105,12 @@ namespace EksamensProjekt.Towers
                         if (Vector2.Distance(projectile.Position, enemy.Position) < projectile.Radius + enemy.Radius)
                         {
                             enemy.TakeDamage(projectileDamage);
-                            projectile.IsActive = false;
+                            projectile.IsActive = false; // Mark projectile as inactive on hit
                             break;
                         }
                     }
                 }
             }
-
-            projectiles.RemoveAll(p => !p.IsActive);
         }
 
         // IObserver Update method implementation
@@ -138,6 +138,4 @@ namespace EksamensProjekt.Towers
             return true;
         }
     }
-
-
 }
