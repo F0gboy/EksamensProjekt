@@ -14,6 +14,7 @@ namespace EksamensProjekt.Database
     {
         private static DatabaseManager instance;
         private static readonly string _connectionString = "Filename=Icecold TD data.db;";
+        private static Player player;
 
         public static DatabaseManager Instance
         {
@@ -99,7 +100,7 @@ namespace EksamensProjekt.Database
                     newPlayerId = highestPlayerIDUser.PlayerId + 1;
                 }
 
-                var player = new Player
+                player = new Player
                 {
                     PlayerId = newPlayerId,
                     LoginId = newLoginId,
@@ -126,26 +127,28 @@ namespace EksamensProjekt.Database
 
         public static bool LoginUser(string playername, string password)
         {
-            
-            using (var db = new LiteDatabase(_connectionString))
+
+            using var db = new LiteDatabase(_connectionString);
+
+            var loginsystems = db.GetCollection<LoginSystem>("loginsystems");
+            var loginsystem = loginsystems.FindOne(x => x.PlayerName == playername);
+            var players = db.GetCollection<Player>("players");
+
+
+            if (loginsystem == null)
             {
-                var loginsystems = db.GetCollection<LoginSystem>("loginsystems");
-                var loginsystem = loginsystems.FindOne(x => x.PlayerName == playername);
-
-                if (loginsystem == null)
-                {
-                    return false;
-                }
-
-                var passwordHash = HashPassword(password);
-
-                if (loginsystem.PlayerPasswordHash == passwordHash)
-                {
-                    Globals.LoginId = loginsystem.LoginId;
-                }
-
-                return loginsystem.PlayerPasswordHash == passwordHash;
+                return false;
             }
+
+            var passwordHash = HashPassword(password);
+
+            if (loginsystem.PlayerPasswordHash == passwordHash)
+            {
+                player = players.FindOne(x => x.LoginId == loginsystem.LoginId);
+                //Globals.LoginId = player.LoginId;
+            }
+
+            return loginsystem.PlayerPasswordHash == passwordHash;
         }
 
         public static void UpdatePlayerStats(int loginId)
@@ -153,7 +156,7 @@ namespace EksamensProjekt.Database
             using (var db = new LiteDatabase(_connectionString))
             {
                 var players = db.GetCollection<Player>("players");
-                var player = players.FindOne(p => p.LoginId == loginId);
+                //player = players.FindOne(p => p.LoginId == loginId);
 
                 if (player != null)
                 {
