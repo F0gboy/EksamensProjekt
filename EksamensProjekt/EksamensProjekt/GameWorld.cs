@@ -15,6 +15,7 @@ namespace EksamensProjekt
         private SpriteBatch _spriteBatch;
         private Menu menu;
         private BuildMenu buildMenu;
+        private EndMenu endMenu;
 
         private GameManager _gameManager;
         private WaveManager waveManager;
@@ -22,6 +23,8 @@ namespace EksamensProjekt
         private UI_liv_money uI_Liv_Money;
         private GraphicsDevice _graphicsDevice;
         private StartGame_State_Menu startGameState;
+
+        
 
         public GameWorld()
         {
@@ -38,15 +41,17 @@ namespace EksamensProjekt
             if (instance == null)
             {
                 instance = new GameWorld();
+                
             }
             return instance;
         }
-
+        
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
             menu  = new Menu(GraphicsDevice, Content);
             buildMenu  = new BuildMenu(GraphicsDevice, Content, _spriteBatch);
+            endMenu  = new EndMenu(GraphicsDevice, Content, _spriteBatch, this);
 
             Globals.WindowSize = new(1920, 1080);
 
@@ -84,9 +89,13 @@ namespace EksamensProjekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            
+
+            if (Globals.life > 0)
+            {
+
             _gameManager.Update();
 
-            // TODO: Add your update logic here
 
             if (menu.gameStart)
             {
@@ -104,15 +113,27 @@ namespace EksamensProjekt
             }
             
             menu.Update(gameTime);
+            }
+            else
+            {
+               endMenu.Update(gameTime);
+
+            }
+
+
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             _spriteBatch.Begin();
+
+
+            if (Globals.life > 0)
+            {
 
             _gameManager.Draw();
 
@@ -124,6 +145,13 @@ namespace EksamensProjekt
                 buildMenu.Draw(_spriteBatch);
                 uI_Liv_Money.Draw(_spriteBatch);
             }
+            }
+            else
+            {
+                endMenu.Draw(_spriteBatch);
+
+            }
+
 
             _spriteBatch.End();
 

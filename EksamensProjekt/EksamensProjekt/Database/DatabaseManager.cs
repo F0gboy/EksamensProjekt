@@ -168,7 +168,6 @@ namespace EksamensProjekt.Database
                 }
                 else
                 {
-                    throw new Exception();
                 }
 
                 Globals.TotalMoney = 0;
