@@ -82,6 +82,7 @@ namespace EksamensProjekt.Database
                 if (highestLoginIDUser != null)
                 {
                     newLoginId = highestLoginIDUser.LoginId + 1;
+                    Globals.LoginId = newLoginId;
                 }
 
                 var loginsystem = new LoginSystem
@@ -145,7 +146,7 @@ namespace EksamensProjekt.Database
             if (loginsystem.PlayerPasswordHash == passwordHash)
             {
                 player = players.FindOne(x => x.LoginId == loginsystem.LoginId);
-                //Globals.LoginId = player.LoginId;
+                Globals.LoginId = player.LoginId;
             }
 
             return loginsystem.PlayerPasswordHash == passwordHash;
@@ -170,13 +171,11 @@ namespace EksamensProjekt.Database
                 {
                 }
 
-                Globals.TotalMoney = 0;
-                Globals.TotalKills = 0;
-                Globals.TotalRounds = 0;
+                
             }
         }
 
-        public Player GetPlayerStats(int loginId)
+        public static Player GetPlayerStats(int loginId)
         {
             using (var db = new LiteDatabase(_connectionString))
             {

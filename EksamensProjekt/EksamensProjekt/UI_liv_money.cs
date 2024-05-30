@@ -26,7 +26,7 @@ namespace EksamensProjekt
             heartPosition = new Rectangle(250, 10, 80, 80);
             UIfont = contentManager.Load<SpriteFont>("UIfont");
             fontScale = new Vector2(1.8f, 1.8f);
-            Globals.life = 1;
+            Globals.life = 100;
             Globals.money = 150;
         }
         public void Update(GameTime gameTime)
