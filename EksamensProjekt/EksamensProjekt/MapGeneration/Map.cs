@@ -22,10 +22,12 @@ namespace EksamensProjekt.MapGeneration
 
         public Map()
         {
+            // Create the map
             Tiles = new Tile[Size.X, Size.Y];
             var texture = Globals.Content.Load<Texture2D>("iceTile2");
             TileSize = new(texture.Width, texture.Height);
 
+            // Create the tiles
             for (int y = 0; y < Size.Y; y++)
             {
                 for (int x = 0; x < Size.X; x++)
@@ -37,6 +39,7 @@ namespace EksamensProjekt.MapGeneration
 
         public void Update()
         {
+            // Update the tiles
             for (int y = 0; y < Size.Y; y++)
             {
 
@@ -49,6 +52,7 @@ namespace EksamensProjekt.MapGeneration
 
         public void Draw()
         {
+            // Draw the tiles
             for (int y = 0; y < Size.Y; y++)
             {
 

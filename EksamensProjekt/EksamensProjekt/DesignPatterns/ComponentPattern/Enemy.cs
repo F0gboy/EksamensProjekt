@@ -61,6 +61,7 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
 
         private void UpdateLoop()
         {
+            // Update loop
             while (isRunning)
             {
                 Update(Globals.gameTime);
@@ -71,36 +72,44 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
 
         public void Update(GameTime gameTime)
         {
+            // Check if the enemy has passed the end of the path
             if (currentPathIndex >= path.Count)
             {
                 HasPassed = true;
                 return;
             }
 
+            // Move the enemy along the path
             Vector2 target = path[currentPathIndex] + new Vector2(tileSize / 2, tileSize / 2); 
             Vector2 direction = target - position;
 
             if (direction.LengthSquared() > 0)
             {
+                // Normalize the direction vector
                 direction.Normalize();
                 position += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 targetRotation = (float)Math.Atan2(direction.Y, direction.X); 
             }
 
             float rotationDifference = targetRotation - rotation;
+
+            // Keep the rotation between -Pi and Pi
             rotation += MathHelper.Clamp(rotationDifference, -rotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds, rotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds);
 
+            // Check if the enemy has reached the target position
             if (Vector2.DistanceSquared(position, target) < (speed * (float)gameTime.ElapsedGameTime.TotalSeconds) * (speed * (float)gameTime.ElapsedGameTime.TotalSeconds))
             {
                 position = target; 
                 currentPathIndex++;
             }
 
+            // Notify observers
             NotifyObservers();
         }
 
         public void Stop()
         {
+            // Stop the update loop
             isRunning = false;
             updateThread.Join();
         }
@@ -113,6 +122,7 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
 
         public void RegisterObserver(IObserver observer)
         {
+            // Add observer to the list if it is not already present
             if (!observers.Contains(observer))
             {
                 observers.Add(observer);
@@ -121,6 +131,7 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
 
         public void TakeDamage(int damage)
         {
+            // Reduce the enemy's health by the damage amount
             health -= damage;
             if (health <= 0)
             {
@@ -128,15 +139,18 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
             }
         }
 
+        // Method to add an observer to the list
         public void RemoveObserver(IObserver observer)
         {
             observers.Remove(observer);
         }
 
+        // Method to notify all observers
         public void NotifyObservers()
         {
             foreach (var observer in observers)
             {
+                // Notify the observer
                 observer.Update(this);
             }
         }

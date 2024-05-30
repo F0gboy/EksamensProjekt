@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EksamensProjekt.Database.DatabaseManager">
+    <Position X="21.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAAAAAEAAQAAAAAAAAAAABAAAAJQAAAAAAAAAE=</HashCode>
+      <FileName>Database\DatabaseManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.Database.LoginSystem">
+    <Position X="17" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAQAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Database\LoginSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.Database.Player">
+    <Position X="23.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAEQAAAAAAAAAAAAAIAABAAAA=</HashCode>
+      <FileName>Database\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.DesignPatterns.ComponentPattern.Component">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPatterns\ComponentPattern\Component.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.DesignPatterns.ComponentPattern.Enemy" BaseTypeListCollapsed="true">
+    <Position X="28" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQMAACAAQgAIgBgAACCMAAAAAEAIyAAIAREgAAgAAg=</HashCode>
+      <FileName>DesignPatterns\ComponentPattern\Enemy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EksamensProjekt.DesignPatterns.ComponentPattern.SpriteRenderer">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAgAAAAAAAAAAAgAgAAAAAAgAgAAAA=</HashCode>
+      <FileName>DesignPatterns\ComponentPattern\SpriteRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projectile">
+    <Position X="12" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIAAAAAAAAogAgEAAAAAAAAAAAAwAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPatterns\ComponentPattern\Projectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.DesignPatterns.FactoryPatterns.EnemyFactory">
+    <Position X="29.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAQAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPatterns\FactoryPatterns\EnemyFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.State_Pattern.Login_State_Menu" BaseTypeListCollapsed="true">
+    <Position X="15.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPatterns\State Pattern\Login_State_Menu.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EksamensProjekt.State_Pattern.Main_State_Menu" BaseTypeListCollapsed="true">
+    <Position X="17" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPatterns\State Pattern\Main_State_Menu.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EksamensProjekt.State_Pattern.Registration_State_Menu" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPatterns\State Pattern\Registration_State_Menu.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EksamensProjekt.State_Pattern.StartGame_State_Menu" BaseTypeListCollapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>DesignPatterns\State Pattern\StartGame_State_Menu.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EksamensProjekt.MapGeneration.Globals">
+    <Position X="21.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAUAAAAAAgAAAAgIAAAAEQABAAAAAAABQAAEAQBAEQA=</HashCode>
+      <FileName>MapGeneration\Globals.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.MapGeneration.Map">
+    <Position X="4.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAogkAAAAAAAAAAAAAAAIIAIAAAAAABAA=</HashCode>
+      <FileName>MapGeneration\Map.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.MapGeneration.Pathfinder">
+    <Position X="7.75" Y="1" Width="1.5" />
+    <NestedTypes>
+      <Class Name="EksamensProjekt.MapGeneration.Pathfinder.Node" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MapGeneration\Pathfinder.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAIAgAAAAAAAgAgQACAAAAAAAAAEgCAAAABgA=</HashCode>
+      <FileName>MapGeneration\Pathfinder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.MapGeneration.Tile">
+    <Position X="6" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAAAAAAAIAAABAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MapGeneration\Tile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.Towers.BasicPenguin" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIAAIQAhAEAASAIAAAAAAEAgAUAABAAAAAAAA=</HashCode>
+      <FileName>Towers\BasicPenguin.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EksamensProjekt.Towers.GameObject">
+    <Position X="10.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAgAAAAAAIAAAAAAAAAQAAAAAQAAAAAA=</HashCode>
+      <FileName>Towers\GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.BuildMenu">
+    <Position X="15.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYBAEJSAABAAkEAAAAAKEAAAAAAAAQAAAAgQAAAIAA=</HashCode>
+      <FileName>BuildMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.EndMenu">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAEJAAABAAgEAAAAAAEAAQBAAAAQAAAAgQAAAIAA=</HashCode>
+      <FileName>EndMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.GameManager">
+    <Position X="4.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAQAAAgAAAAAAAAAAIBAAAgAAAEIAAAAAAAA=</HashCode>
+      <FileName>GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.GameWorld">
+    <Position X="23" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAAACQAAAwAAAEAAAAhABABCAAACAIAAAAAIAAQ=</HashCode>
+      <FileName>GameWorld.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.InputManager">
+    <Position X="24.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAgAAAAEAAQ=</HashCode>
+      <FileName>InputManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.Menu">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAADgQANAAkEAogAAAEAAEAAABAgAAAYgQAAANAA=</HashCode>
+      <FileName>Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.UI_liv_money">
+    <Position X="24.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAQAAAggIAgAAAAAAgAAAAAQAAAAAAAABAAA=</HashCode>
+      <FileName>UI_liv_money.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensProjekt.WaveManager">
+    <Position X="26.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAABgQgIAAggAACAAAAAAAAIAAAABBAAMVAAESAAQ=</HashCode>
+      <FileName>WaveManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="EksamensProjekt.DesignPatterns.ObserverPatterns.IObserver">
+    <Position X="12" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPatterns\ObserverPatterns\IObserver.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EksamensProjekt.DesignPatterns.ObserverPatterns.IObservable">
+    <Position X="10.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAAAgAAA=</HashCode>
+      <FileName>DesignPatterns\ObserverPatterns\IObserver.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="EksamensProjekt.State_Pattern.I_State_Menu">
+    <Position X="13.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DesignPatterns\State Pattern\I_State_Menu.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

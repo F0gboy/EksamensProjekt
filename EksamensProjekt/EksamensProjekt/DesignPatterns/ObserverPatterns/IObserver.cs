@@ -14,6 +14,7 @@ namespace EksamensProjekt.DesignPatterns.ObserverPatterns
 
     public interface IObservable
     {
+        //Methods for adding, removing and notifying observers
         void RegisterObserver(IObserver observer);
         void RemoveObserver(IObserver observer);
         void NotifyObservers();

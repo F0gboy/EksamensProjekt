@@ -18,6 +18,7 @@ namespace EksamensProjekt.State_Pattern
 
         public void Update(Menu menu, GameTime gameTime)
         {
+            // check if the start button is clicked
             MouseState mouseState = Mouse.GetState();
             if (!menu.clicked && mouseState.LeftButton == ButtonState.Pressed)
             {
@@ -41,6 +42,7 @@ namespace EksamensProjekt.State_Pattern
                 {
                     if (!string.IsNullOrEmpty(menu.stringName.ToString()) && !string.IsNullOrEmpty(menu.stringPassword.ToString()))
                     {
+                        // Register user
                         if (Database.DatabaseManager.RegisterUser(menu.stringName, menu.stringPassword) == true)
                         {
                             menu.GameState(new StartGame_State_Menu());
@@ -78,14 +80,17 @@ namespace EksamensProjekt.State_Pattern
             if (menu.registration == false)
             {
 
+                // Draw the registration button
                 spriteBatch.Draw(menu.background, Vector2.Zero, Color.White);
                 spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, Globals.WindowSize.Y / 2), Color.White);
                 spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, Globals.WindowSize.Y / 2 + 100), Color.White);
                 spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, Globals.WindowSize.Y / 2 + 200), Color.White);
 
+                // Draw text
                 Vector2 registrationTextPosition = new Vector2(menu.firstButton.Center.X - menu.font.MeasureString(menu.registrationTextName).Length() + 45, menu.firstButton.Center.Y - menu.font.MeasureString("Registration").Y / 2);
                 Vector2 loginTextPosition = new Vector2(menu.secondButton.Center.X - menu.font.MeasureString(menu.registrationTextPassword).Length() + 70, menu.secondButton.Center.Y - menu.font.MeasureString("Login").Y / 2);
                 Vector2 thirdButtonTextPosition = new Vector2(menu.thirdButton.Center.X - menu.font.MeasureString("Save").Length() + 40, menu.thirdButton.Center.Y - menu.font.MeasureString("Save").Y / 2);
+
 
                 spriteBatch.DrawString(menu.font, menu.registrationTextName, registrationTextPosition, Color.White);
                 spriteBatch.DrawString(menu.font, menu.registrationTextPassword, loginTextPosition, Color.White);

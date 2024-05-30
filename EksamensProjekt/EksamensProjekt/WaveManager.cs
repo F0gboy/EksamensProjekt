@@ -14,6 +14,7 @@ namespace EksamensProjekt
 {
     public class WaveManager
     {
+        // Fields
         private int waveNumber;
         private float spawnTimer;
         private float waveTimer;
@@ -31,8 +32,10 @@ namespace EksamensProjekt
         private int strongEnemiesCount;
         private readonly object enemyListLock = new object();
 
+        // Constructor
         public WaveManager(Texture2D normalEnemyTexture, Texture2D strongEnemyTexture, List<Vector2> pathPoints, float timeBetweenSpawns, float enemySpeed, float timeBetweenWaves)
         {
+            // Initialize fields
             this.waveNumber = 1;
             this.spawnTimer = 0f;
             this.waveTimer = 0f;
@@ -53,7 +56,8 @@ namespace EksamensProjekt
         public void Update(GameTime gameTime)
         {
             Globals.enemies = enemies;
-
+            
+            // Lock the enemy list to prevent concurrent modification
             lock (enemyListLock)
             {
                 // Update each enemy and check if they have passed or are dead
@@ -64,15 +68,18 @@ namespace EksamensProjekt
 
                     if (enemy.HasPassed)
                     {
+                        // Remove enemy if it has passed the end of the path
                         Globals.life -= enemy.value;
                         enemies.RemoveAt(i);
                         if (Globals.life <= 0)
                         {
+                            // Update player stats in the database
                             DatabaseManager.UpdatePlayerStats(Globals.LoginId);
                         }
                     }
                     else if (enemy.IsDead)
                     {
+                        // Remove enemy if it is dead
                         Globals.money += enemy.value * 5;
                         Globals.TotalMoney += enemy.value * 5;
                         Globals.TotalKills++;
@@ -85,13 +92,15 @@ namespace EksamensProjekt
                 {
                     spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+                    // Spawn a new enemy if the spawn timer has reached the time between spawns
                     if (spawnTimer >= timeBetweenSpawns && totalEnemiesSpawned < enemiesPerWave)
                     {
                         Task.Run(() => SpawnEnemy());
                         spawnTimer = 0f;
                         totalEnemiesSpawned++;
                     }
-
+                    
+                    // Check if the wave is cleared
                     if (totalEnemiesSpawned >= enemiesPerWave && enemies.Count == 0)
                     {
                         waveInProgress = false;
@@ -102,6 +111,7 @@ namespace EksamensProjekt
                 {
                     waveTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+                    // Start the next wave if the wave timer has reached the time between waves
                     if (waveTimer >= timeBetweenWaves)
                     {
                         StartNextWave();
@@ -112,6 +122,7 @@ namespace EksamensProjekt
 
         private void StartNextWave()
         {
+            // Increase the wave number and update the total rounds
             waveNumber++;
             Globals.TotalRounds++;
             lock (enemyListLock)
@@ -125,6 +136,7 @@ namespace EksamensProjekt
             spawnTimer = 0f;
             totalEnemiesSpawned = 0;
 
+            // Increase the health of enemies every 10 waves
             if (waveNumber >= strongEnemyThreshold)
             {
                 strongEnemiesCount = waveNumber - strongEnemyThreshold + 1;
@@ -140,10 +152,12 @@ namespace EksamensProjekt
 
         private void SpawnEnemy()
         {
+            // Spawn a new enemy at the start of the path
             Vector2 spawnPosition = pathPoints[0] + new Vector2(0f, 0f);
             bool isStrong = waveNumber >= strongEnemyThreshold && (totalEnemiesSpawned % (enemiesPerWave / (strongEnemiesCount + 1)) == 0);
             Enemy newEnemy = enemyFactory.CreateEnemy(spawnPosition, new List<Vector2>(pathPoints), enemySpeed, 120f, isStrong);
 
+            // Add the new enemy to the list
             lock (enemyListLock)
             {
                 enemies.Add(newEnemy);
@@ -152,6 +166,7 @@ namespace EksamensProjekt
 
         public void OnEnemyKilled(Enemy enemy)
         {
+            // Remove the enemy from the list and add money to the player's balance
             lock (enemyListLock)
             {
                 enemies.Remove(enemy);
@@ -173,6 +188,7 @@ namespace EksamensProjekt
 
         public List<Enemy> GetEnemies()
         {
+            // Return a copy of the enemy list to prevent concurrent modification
             lock (enemyListLock)
             {
                 return new List<Enemy>(enemies);
