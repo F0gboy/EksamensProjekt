@@ -67,7 +67,7 @@ namespace EksamensProjekt
                     // Restart
                     if (penguin1.Contains(mouseState.Position))
                     {
-                        // Restart logic here
+                        gw = new GameWorld();
                     }
                     // Quit
                     else if (penguin2.Contains(mouseState.Position))
@@ -91,9 +91,9 @@ namespace EksamensProjekt
 
             DrawCenteredText(spriteBatch, font, "Restart", penguin1, Color.White);
             DrawCenteredText(spriteBatch, font, "Quit", penguin2, Color.White);
+                screenHeight / 2 - 445, 0, 0), Color.Black);
             DrawCenteredText(spriteBatch, font, "Total kills: " + Globals.TotalKills.ToString() + " Total Money: " + Globals.TotalMoney.ToString() + " Total Rounds: " + Globals.TotalRounds.ToString(),
                 new Rectangle(screenWidth / 2 - (int)(font.MeasureString("Total kills: " + Globals.TotalKills.ToString() + " Total Money: " + Globals.TotalMoney.ToString() + " Total Rounds: " + Globals.TotalRounds.ToString()).X / 2 - 220),
-                screenHeight / 2 - 445, 0, 0), Color.Black);
         }
 
         private void DrawCenteredText(SpriteBatch spriteBatch, SpriteFont font, string text, Rectangle rectangle, Color color)
