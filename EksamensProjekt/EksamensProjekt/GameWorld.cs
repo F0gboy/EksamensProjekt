@@ -24,8 +24,6 @@ namespace EksamensProjekt
         private GraphicsDevice _graphicsDevice;
         private StartGame_State_Menu startGameState;
 
-        
-
         public GameWorld()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -38,6 +36,7 @@ namespace EksamensProjekt
         }
         public static GameWorld GetInstance()
         {
+            // Singleton pattern
             if (instance == null)
             {
                 instance = new GameWorld();
@@ -93,26 +92,26 @@ namespace EksamensProjekt
 
             if (Globals.life > 0)
             {
+                _gameManager.Update();
 
-            _gameManager.Update();
+                // Update the menu
+                 if (menu.gameStart)
+                 {
+                    buildMenu.Update(gameTime, waveManager.GetEnemies());
+                 }
+                 
+                 menu.Update(gameTime);
 
-
-            if (menu.gameStart)
-            {
-               buildMenu.Update(gameTime, waveManager.GetEnemies());
-            }
-
-            menu.Update(gameTime);
-
-            if (Globals.gameStarted)
-            {
-                Globals.Update(gameTime);
-                waveManager.Update(gameTime);
-                uI_Liv_Money.Update(gameTime);
-                Globals.gameTime = gameTime;
-            }
+                 // Update related to game logic
+                 if (Globals.gameStarted)
+                 {
+                      Globals.Update(gameTime);
+                     waveManager.Update(gameTime);
+                     uI_Liv_Money.Update(gameTime);
+                     Globals.gameTime = gameTime;
+                 }
             
-            menu.Update(gameTime);
+                 menu.Update(gameTime);
             }
             else
             {

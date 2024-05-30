@@ -65,7 +65,6 @@ namespace EksamensProjekt.Database
         //    }
         //}
 
-
         public static bool RegisterUser(string playername, string password)
         {
             using (var db = new LiteDatabase(_connectionString))
@@ -77,6 +76,7 @@ namespace EksamensProjekt.Database
                     return false;
                 }
 
+                // Create a new login system
                 int newLoginId = 1;
                 var highestLoginIDUser = loginsystems.FindAll().OrderByDescending(x => x.LoginId).FirstOrDefault();
                 if (highestLoginIDUser != null)
@@ -85,6 +85,7 @@ namespace EksamensProjekt.Database
                     Globals.LoginId = newLoginId;
                 }
 
+                // Create a new player
                 var loginsystem = new LoginSystem
                 {
                     LoginId = newLoginId,
@@ -118,6 +119,7 @@ namespace EksamensProjekt.Database
 
         private static string HashPassword(string password)
         {
+            // Create a SHA256 hash of the password
             using (var sha256 = SHA256.Create())
             {
                 var bytes = Encoding.UTF8.GetBytes(password);
@@ -128,7 +130,7 @@ namespace EksamensProjekt.Database
 
         public static bool LoginUser(string playername, string password)
         {
-
+            // Check if the user exists and the password is correct
             using var db = new LiteDatabase(_connectionString);
 
             var loginsystems = db.GetCollection<LoginSystem>("loginsystems");
@@ -154,10 +156,10 @@ namespace EksamensProjekt.Database
 
         public static void UpdatePlayerStats(int loginId)
         {
+            // Update the player stats in the database
             using (var db = new LiteDatabase(_connectionString))
             {
                 var players = db.GetCollection<Player>("players");
-                //player = players.FindOne(p => p.LoginId == loginId);
 
                 if (player != null)
                 {
@@ -167,18 +169,17 @@ namespace EksamensProjekt.Database
 
                     players.Update(player);
                 }
-                else
-                {
-                }
 
                 
             }
         }
 
-        public static Player GetPlayerStats(int loginId)
+        //Get player stats
+        public Player GetPlayerStats(int loginId)
         {
             using (var db = new LiteDatabase(_connectionString))
             {
+                // Get the player stats from the database
                 var players = db.GetCollection<Player>("players");
                 return players.FindOne(p => p.LoginId == loginId);
             }
