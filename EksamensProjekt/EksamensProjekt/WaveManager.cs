@@ -73,8 +73,8 @@ namespace EksamensProjekt
                     }
                     else if (enemy.IsDead)
                     {
-                        Globals.money += enemy.value * 10;
-                        Globals.TotalMoney += enemy.value * 10;
+                        Globals.money += enemy.value * 5;
+                        Globals.TotalMoney += enemy.value * 5;
                         Globals.TotalKills++;
                         enemies.RemoveAt(i);
                     }
