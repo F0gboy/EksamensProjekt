@@ -175,7 +175,7 @@ namespace EksamensProjekt.Database
         }
 
         //Get player stats
-        public Player GetPlayerStats(int loginId)
+        public static Player GetPlayerStats(int loginId)
         {
             using (var db = new LiteDatabase(_connectionString))
             {
