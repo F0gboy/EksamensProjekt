@@ -68,7 +68,7 @@ namespace EksamensProjekt
                     //Restart
                     if (penguin1.Contains(mouseState.Position))
                     {
-                        
+                        gw = new GameWorld();
                     }
                     //Quit
                     else if (penguin2.Contains(mouseState.Position))
