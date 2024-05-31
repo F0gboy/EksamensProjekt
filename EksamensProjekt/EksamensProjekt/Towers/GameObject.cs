@@ -11,6 +11,7 @@ namespace EksamensProjekt.Towers
 {
     abstract class GameObject
     {
+        // Fields
         private SpriteBatch spriteBatch;
         private GraphicsDevice graphicsDevice; 
         private ContentManager contentManager;

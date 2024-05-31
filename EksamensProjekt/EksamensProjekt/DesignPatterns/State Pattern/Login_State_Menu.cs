@@ -39,6 +39,7 @@ namespace EksamensProjekt.State_Pattern
                     {
                         if (Database.DatabaseManager.LoginUser(menu.stringName, menu.stringPassword) == true)
                         {
+                            //if the user is logged in the game will start
                             menu.GameState(new StartGame_State_Menu());
                             menu.gameStart = true;
 
@@ -46,10 +47,11 @@ namespace EksamensProjekt.State_Pattern
                     }
                 }
             }
-                if (mouseState.LeftButton != ButtonState.Pressed)
+            if (mouseState.LeftButton != ButtonState.Pressed)
                     menu.clicked = false;
             
-                menu.currentKeyboardState = Keyboard.GetState();
+            menu.currentKeyboardState = Keyboard.GetState();
+            // Check if the keyboard is pressed
                 if (menu.currentKeyboardState.GetPressedKeyCount() > 0 && !menu.keyboardPressed)
                 {
                     menu.keyboardPressed = true;
@@ -65,8 +67,6 @@ namespace EksamensProjekt.State_Pattern
         }
         public void Draw(Menu menu, SpriteBatch spriteBatch)
         {
-       
-            
                 spriteBatch.Draw(menu.background, Vector2.Zero, Color.White);
                 spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, Globals.WindowSize.Y / 2), Color.White);
                 spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, Globals.WindowSize.Y / 2 + 100), Color.White);

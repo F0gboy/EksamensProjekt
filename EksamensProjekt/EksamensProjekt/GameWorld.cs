@@ -105,7 +105,7 @@ namespace EksamensProjekt
                  // Update related to game logic
                  if (Globals.gameStarted)
                  {
-                      Globals.Update(gameTime);
+                     Globals.Update(gameTime);
                      waveManager.Update(gameTime);
                      uI_Liv_Money.Update(gameTime);
                      Globals.gameTime = gameTime;
@@ -118,8 +118,6 @@ namespace EksamensProjekt
                endMenu.Update(gameTime);
 
             }
-
-
 
             base.Update(gameTime);
         }
@@ -134,16 +132,16 @@ namespace EksamensProjekt
             if (Globals.life > 0)
             {
 
-            _gameManager.Draw();
+                  _gameManager.Draw();
 
-            waveManager.Draw(gameTime, _spriteBatch);
-            menu.Draw(_spriteBatch);
+                  waveManager.Draw(gameTime, _spriteBatch);
+                  menu.Draw(_spriteBatch);
 
-            if (menu.gameStart)
-            {
-                buildMenu.Draw(_spriteBatch);
-                uI_Liv_Money.Draw(_spriteBatch);
-            }
+                 if (menu.gameStart)
+                 {
+                     buildMenu.Draw(_spriteBatch);
+                     uI_Liv_Money.Draw(_spriteBatch);
+                 }
             }
             else
             {

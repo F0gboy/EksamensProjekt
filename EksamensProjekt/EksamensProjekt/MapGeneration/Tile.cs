@@ -26,24 +26,8 @@ namespace EksamensProjekt.MapGeneration
 
         public void Update()
         {
-            if (Rectangle.Contains(InputManager.MouseRectangle))
-            {
-                if (InputManager.MouseClicked)
-                {
-                    Blocked = !Blocked;
-                }
-
-                if (InputManager.MouseRightClicked)
-                {
-                   // Pathfinder.AStarPathfinding(_mapX, _mapY);
-                }
-            }
-
-            //Color = Path ? Microsoft.Xna.Framework.Color.Green : Microsoft.Xna.Framework.Color.White;
-            //Color = Blocked ? Microsoft.Xna.Framework.Color.Red : Microsoft.Xna.Framework.Color.White;
-
+            //Set tile texture based on if it is a path or not
             texture = Path ? Globals.Content.Load<Texture2D>("watertile2") : Globals.Content.Load<Texture2D>("iceTile2");
-             
         }
     }
 }

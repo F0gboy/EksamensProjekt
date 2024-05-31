@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace EksamensProjekt.State_Pattern
 {
-public class Main_State_Menu:I_State_Menu
+    public class Main_State_Menu:I_State_Menu
     {
         public void Update(Menu menu, GameTime gameTime)
         {
@@ -37,12 +37,12 @@ public class Main_State_Menu:I_State_Menu
                     Environment.Exit(0);
                 }
             }
-                if (mouseState.LeftButton != ButtonState.Pressed)
-                    menu.clicked = false;
+            if (mouseState.LeftButton != ButtonState.Pressed)
+                menu.clicked = false;
         }
         public void Draw(Menu menu, SpriteBatch spriteBatch)
         {           
-            
+            // Draw the menu
                 spriteBatch.Draw(menu.background, Vector2.Zero, Color.White);
                 spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, Globals.WindowSize.Y / 2), Color.White);
                 spriteBatch.Draw(menu.button, new Vector2(Globals.WindowSize.X / 2 - 95, Globals.WindowSize.Y / 2 + 100), Color.White);

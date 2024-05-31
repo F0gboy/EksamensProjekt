@@ -55,6 +55,7 @@ namespace EksamensProjekt
         {
             MouseState mouseState = Mouse.GetState();
 
+            // Debugging output for mouse position and button rectangles
             foreach  (BasicPenguin go in PinguObjects)
             {
                 go.Update(gameTime);
@@ -116,12 +117,14 @@ namespace EksamensProjekt
 
                     else if (buildActive)
                     {
+                        //build system
                         buildActive = false;
                         switch (buildInt)
                         {
                             case 1:
                                 if (Globals.money >= 100)
                                 {
+                                    // if money is more than 100 then add a new penguin
                                     PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("p1"), contentManager.Load<Texture2D>("BulletS"), 500, 1, 1, 500));
                                       Globals.money -= 100;
                                 }
@@ -130,6 +133,7 @@ namespace EksamensProjekt
                             case 2:
                                 if (Globals.money >= 250)
                                 {
+                                    // if money is more than 250 then add a new penguin
                                     PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("pingvintank2"), contentManager.Load<Texture2D>("Bullet"), 500, 10, 3, 500));
                                     Globals.money -= 250;
 
@@ -139,14 +143,12 @@ namespace EksamensProjekt
                             case 3:
                                 if (Globals.money >= 500)
                                 {
+                                    // if money is more than 500 then add a new penguin
                                     PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("p2"), contentManager.Load<Texture2D>("BulletS"), 500, 1, 0.2f, 500));
                                     Globals.money -= 500;
 
                                 }
                                 break;
-
-
-
 
                             default:
                                 break;
@@ -166,7 +168,7 @@ namespace EksamensProjekt
 
             }
 
-
+            // Update all penguins
             foreach (BasicPenguin go in PinguObjects)
             {
                 go.Update(gameTime);
@@ -181,6 +183,7 @@ namespace EksamensProjekt
            
         }
 
+        // Draw all penguins
         public void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.Draw(background, Vector2.Zero, Color.White);
@@ -190,7 +193,7 @@ namespace EksamensProjekt
             spriteBatch.Draw(button, new Vector2(screenWidth - button.Width, screenHeight / 2-280), null, Color.White, 0, new Vector2(button.Width / 2, button.Height / 2), 1.75f, SpriteEffects.None, 0);
             spriteBatch.Draw(button, new Vector2(screenWidth - button.Width, screenHeight / 2+320), null, Color.White, 0, new Vector2(button.Width / 2, button.Height / 2), 1.75f, SpriteEffects.None, 0);
             
-            
+            // Draw text
             spriteBatch.DrawString(font, "Penguin\n   100$", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin").Length()*1.6f / 2, screenHeight / 2 - 45), Color.White, 0, new Vector2(0, 0), 1.7f, SpriteEffects.None, 0);
             spriteBatch.DrawString(font, "Penguin Tank\n      250$", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin Tank").Length()*1.6f / 2, screenHeight / 2 - 45 - 300), Color.White, 0, new Vector2(0, 0), 1.7f, SpriteEffects.None, 0);
             spriteBatch.DrawString(font, "Penguin gunner\n        500$", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin gunner").Length()*1.65f / 2, screenHeight / 2 - 45 + 300), Color.White, 0, new Vector2(0, 0), 1.7f, SpriteEffects.None, 0);
@@ -199,6 +202,7 @@ namespace EksamensProjekt
 
             if (buildActive)
             {
+                // Draw the tile
                  spriteBatch.Draw(tile, new Vector2(mouseState.Position.X, mouseState.Position.Y), null, Color.Green, 0, new Vector2(tile.Width / 2*0.5f, tile.Height / 2*0.5f), 0.5f, SpriteEffects.None, 0);
             }
 
@@ -217,6 +221,7 @@ namespace EksamensProjekt
 
         private static Texture2D rect;
 
+        // Draw a rectangle
         private void DrawRectangle(Rectangle coords, Color color, SpriteBatch spriteBatch)
         {
             if (rect == null)

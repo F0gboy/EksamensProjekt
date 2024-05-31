@@ -12,6 +12,7 @@ namespace EksamensProjekt
 {
 public class Menu
     {
+        // Fields
         private I_State_Menu currentState;
         public Texture2D background;
         public Texture2D button;
@@ -39,6 +40,8 @@ public class Menu
 
         int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         int screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+
+        // Constructor
         public Menu(GraphicsDevice graphicsDevice, ContentManager contentManager)
         {
             background = contentManager.Load<Texture2D>("Background 3");
@@ -52,6 +55,8 @@ public class Menu
             startButton= new Rectangle(Globals.WindowSize.X / 2 - 100,10, button.Width, button.Height);
             currentState =new Main_State_Menu();
         }
+
+        // Methods
         public void GameState (I_State_Menu newState)
         {
             currentState= newState;
@@ -68,10 +73,12 @@ public class Menu
 
         public void HandleInput(ref string input)
         {
+            // Get the current state of the keyboard
             currentKeyboardState = Keyboard.GetState();
 
             Keys[] keys = currentKeyboardState.GetPressedKeys();
 
+            // Loop through all the pressed keys
             foreach (Keys key in keys)
             {
                 if (previousKeyboardState.IsKeyUp(key))
