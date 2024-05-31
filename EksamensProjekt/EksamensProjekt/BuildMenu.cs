@@ -15,6 +15,7 @@ namespace EksamensProjekt
 {
     internal class BuildMenu
     {
+        //Leonard
 
         private Texture2D background;
         private Texture2D button;
@@ -131,21 +132,21 @@ namespace EksamensProjekt
                                 break;
 
                             case 2:
-                                if (Globals.money >= 500)
+                                if (Globals.money >= 350)
                                 {
                                     // if money is more than 250 then add a new penguin
                                     PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("pingvintank2"), contentManager.Load<Texture2D>("Bullet"), 500, 10, 3, 500));
-                                    Globals.money -= 500;
+                                    Globals.money -= 350;
 
                                 }
                                 break;
 
                             case 3:
-                                if (Globals.money >= 1000)
+                                if (Globals.money >= 650)
                                 {
                                     // if money is more than 500 then add a new penguin
                                     PinguObjects.Add(new BasicPenguin(mouseState.Position.ToVector2(), contentManager.Load<Texture2D>("p2"), contentManager.Load<Texture2D>("BulletS"), 500, 1, 0.2f, 500));
-                                    Globals.money -= 1000;
+                                    Globals.money -= 650;
 
                                 }
                                 break;
@@ -194,9 +195,9 @@ namespace EksamensProjekt
             spriteBatch.Draw(button, new Vector2(screenWidth - button.Width, screenHeight / 2+320), null, Color.White, 0, new Vector2(button.Width / 2, button.Height / 2), 1.75f, SpriteEffects.None, 0);
             
             
-            spriteBatch.DrawString(font, "Penguin\n   150$", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin").Length()*1.6f / 2, screenHeight / 2 - 45), Color.White, 0, new Vector2(0, 0), 1.7f, SpriteEffects.None, 0);
-            spriteBatch.DrawString(font, "Penguin Tank\n      500$", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin Tank").Length()*1.6f / 2, screenHeight / 2 - 45 - 300), Color.White, 0, new Vector2(0, 0), 1.7f, SpriteEffects.None, 0);
-            spriteBatch.DrawString(font, "Penguin gunner\n        1000$", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin gunner").Length()*1.65f / 2, screenHeight / 2 - 45 + 300), Color.White, 0, new Vector2(0, 0), 1.7f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "Penguin\n   $150", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin").Length()*1.6f / 2, screenHeight / 2 - 45), Color.White, 0, new Vector2(0, 0), 1.7f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "Penguin Tank\n      $350", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin Tank").Length()*1.6f / 2, screenHeight / 2 - 45 - 300), Color.White, 0, new Vector2(0, 0), 1.7f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, "Penguin gunner\n        $650", new Vector2(screenWidth - button.Width - font.MeasureString("Penguin gunner").Length()*1.65f / 2, screenHeight / 2 - 45 + 300), Color.White, 0, new Vector2(0, 0), 1.7f, SpriteEffects.None, 0);
             
             MouseState mouseState = Mouse.GetState();
 

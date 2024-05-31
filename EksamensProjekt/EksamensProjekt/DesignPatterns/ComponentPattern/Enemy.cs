@@ -13,6 +13,8 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
 {
     public class Enemy : IObservable
     {
+        //Jasper
+
         private Texture2D texture;
         private List<Vector2> path;
         private int currentPathIndex;

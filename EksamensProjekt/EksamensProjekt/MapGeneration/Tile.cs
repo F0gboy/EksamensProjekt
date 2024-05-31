@@ -11,6 +11,7 @@ namespace EksamensProjekt.MapGeneration
 {
     public class Tile : SpriteRenderer
     {
+        //Jasper
         public bool Blocked { get; set; }
         public bool Path { get; set; }
 

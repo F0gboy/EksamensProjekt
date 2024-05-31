@@ -12,6 +12,8 @@ namespace EksamensProjekt.DesignPatterns.FactoryPatterns
 {
     public class EnemyFactory
     {
+        // Jasper
+
         private Texture2D normalEnemyTexture;
         private Texture2D strongEnemyTexture;
 

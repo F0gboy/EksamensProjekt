@@ -9,6 +9,8 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
 {
     public abstract class Component
     {
+        //Jasper 
+
         public Component(Game game)
         {
             

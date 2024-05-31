@@ -12,6 +12,8 @@ namespace EksamensProjekt.Database
 {
     internal class DatabaseManager
     {
+        //Marc
+
         private static DatabaseManager instance;
         private static readonly string _connectionString = "Filename=Icecold TD data.db;";
         private static Player player;
@@ -111,6 +113,8 @@ namespace EksamensProjekt.Database
                     TotalRound = 0
                 };
 
+                Globals.LoginId = player.LoginId;
+
                 players.Insert(player);
 
                 return true;
@@ -148,7 +152,9 @@ namespace EksamensProjekt.Database
             if (loginsystem.PlayerPasswordHash == passwordHash)
             {
                 player = players.FindOne(x => x.LoginId == loginsystem.LoginId);
+
                 Globals.LoginId = player.LoginId;
+                
             }
 
             return loginsystem.PlayerPasswordHash == passwordHash;

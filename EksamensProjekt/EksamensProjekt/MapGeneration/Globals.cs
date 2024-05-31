@@ -12,6 +12,8 @@ namespace EksamensProjekt.MapGeneration
 {
     public static class Globals
     {
+        //Alle
+
         public static float Time { get; set; }
         public static ContentManager Content { get; set; }
         public static SpriteBatch SpriteBatch { get; set; }

@@ -10,6 +10,8 @@ namespace EksamensProjekt
 {
     internal class GameManager
     {
+        //Jasper
+
         public List<Vector2> PathPoints { get; private set; }
         private Map _map;
         private int tileSize = 120;

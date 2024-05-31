@@ -9,6 +9,7 @@ namespace EksamensProjekt.DesignPatterns.ObserverPatterns
 {
     public interface IObserver
     {
+        //Jasper
         void Update(Enemy enemy);
     }
 

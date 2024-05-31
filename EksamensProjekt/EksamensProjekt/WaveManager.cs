@@ -14,6 +14,8 @@ namespace EksamensProjekt
 {
     public class WaveManager
     {
+        //Jasper
+
         // Fields
         private int waveNumber;
         private float spawnTimer;

@@ -9,6 +9,8 @@ namespace EksamensProjekt.MapGeneration
 {
     public static class Pathfinder
     {
+        //Jasper
+
         // Node class for A* pathfinding
         class Node
         {

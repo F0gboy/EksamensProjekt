@@ -10,6 +10,8 @@ namespace EksamensProjekt
 {
     public static class InputManager
     {
+        //Jasper
+
         private static MouseState _lastMouseState;
         public static bool MouseClicked { get; private set; }
         public static bool MouseRightClicked { get; private set; }

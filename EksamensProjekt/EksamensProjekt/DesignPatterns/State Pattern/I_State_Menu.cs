@@ -10,6 +10,7 @@ namespace EksamensProjekt.State_Pattern
 {
   public interface I_State_Menu
     {
+        //Vadym
        public void Update(Menu menu,GameTime gameTime);
         public void Draw(Menu menu,SpriteBatch spriteBatch);
     }

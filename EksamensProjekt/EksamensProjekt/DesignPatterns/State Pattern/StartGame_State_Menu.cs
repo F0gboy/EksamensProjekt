@@ -12,6 +12,8 @@ namespace EksamensProjekt.State_Pattern
 {
     public class StartGame_State_Menu: I_State_Menu
     {
+        //Vadym
+
         public Vector2 textPos;
 
         public void Update(Menu menu, GameTime gameTime)

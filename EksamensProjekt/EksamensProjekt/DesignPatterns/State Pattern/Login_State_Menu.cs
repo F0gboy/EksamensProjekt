@@ -12,6 +12,8 @@ namespace EksamensProjekt.State_Pattern
 {
     public class Login_State_Menu:I_State_Menu
     {
+        //Vadym
+
         public void Update(Menu menu, GameTime gameTime)
         {
             MouseState mouseState = Mouse.GetState();

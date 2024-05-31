@@ -12,6 +12,8 @@ namespace EksamensProjekt
 {
     public class UI_liv_money
     {
+        //Vadym
+
         private Texture2D fishTexture;
         private Texture2D heartTexture;
         private Rectangle fishPosition;

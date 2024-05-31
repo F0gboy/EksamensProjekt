@@ -12,6 +12,8 @@ namespace EksamensProjekt.State_Pattern
 {
     public class Registration_State_Menu : I_State_Menu
     {
+        //Vadym
+
         public Registration_State_Menu()
         {
         }

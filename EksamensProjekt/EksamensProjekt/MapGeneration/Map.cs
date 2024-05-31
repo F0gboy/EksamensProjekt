@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework;
 
 namespace EksamensProjekt.MapGeneration
 {
+    //Jasper
+
     public class Map
     {
         public readonly Point Size = new(13, 9);

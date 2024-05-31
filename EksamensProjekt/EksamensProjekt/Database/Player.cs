@@ -8,6 +8,7 @@ namespace EksamensProjekt.Database
 {
     internal class Player
     {
+        //Marc
         public int PlayerId { get; set; }
         public int TotalRound { get; set; }
         public int TotalKills { get; set; }        

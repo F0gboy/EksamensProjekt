@@ -12,6 +12,8 @@ namespace EksamensProjekt
 {
 public class Menu
     {
+        //Vadym
+
         // Fields
         private I_State_Menu currentState;
         public Texture2D background;

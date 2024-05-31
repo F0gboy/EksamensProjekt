@@ -16,6 +16,8 @@ namespace EksamensProjekt
 {
     internal class EndMenu
     {
+        //Leonard
+
         private Texture2D background;
         private Texture2D button;
         private SpriteFont font;

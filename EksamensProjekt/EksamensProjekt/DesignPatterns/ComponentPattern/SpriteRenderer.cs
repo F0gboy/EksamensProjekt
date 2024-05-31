@@ -11,6 +11,7 @@ namespace EksamensProjekt.DesignPatterns.ComponentPattern
 {
     public class SpriteRenderer : Component
     {
+        // Jasper
         public Texture2D texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Origin { get; protected set; }

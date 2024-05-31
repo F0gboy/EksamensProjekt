@@ -10,6 +10,8 @@ namespace EksamensProjekt
 {
     public class GameWorld : Game
     {
+        //Alle
+
         private static GameWorld instance;
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;

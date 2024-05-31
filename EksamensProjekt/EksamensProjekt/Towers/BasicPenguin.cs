@@ -15,6 +15,8 @@ namespace EksamensProjekt.Towers
 {
     internal class BasicPenguin : IObserver
     {
+        //Leonard
+
         private Vector2 position;
         private Texture2D texture;
         private Texture2D projectileTexture;

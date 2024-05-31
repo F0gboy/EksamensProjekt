@@ -9,6 +9,8 @@ using static System.Net.Mime.MediaTypeNames;
 
 public class Projectile
 {
+    //Leonard
+
     public Vector2 Position { get; private set; }
     private Vector2 direction;
     private float speed;
